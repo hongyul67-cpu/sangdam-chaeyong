@@ -329,7 +329,11 @@ def bokji_post(pairs, timeout=30):
         with _urlopen(req, timeout) as r:
             return r.read().decode("utf-8", "ignore")
     except Exception as e:                       # noqa: BLE001
-        log("  복지넷 호출 실패: %s" % type(e).__name__)
+        # 왜 실패했는지를 반드시 남긴다. 타입만 찍었더니 깃허브에서 복지넷이
+        # 통째로 막혔을 때 원인을 알 수 없었다(2026-09-18).
+        속 = getattr(e, "reason", None)
+        log("  복지넷 호출 실패: %s (%s)"
+            % (type(e).__name__, repr(속)[:120] if 속 is not None else str(e)[:120]))
         return ""
 
 
@@ -399,7 +403,13 @@ def bokji_fetch():
         for kw in BOKJI_KEYWORDS:
             plans.append((name + "·" + kw, code, "", "REQUIREFIELD", kw))
 
+    막힘 = 0
     for label, region, sisul, gubun, kw in plans:
+        # 한 번 막힌 집을 계속 두드리지 않는다. 연달아 세 번 실패하면 접는다.
+        if 막힘 >= 3:
+            log("  복지넷이 연달아 막혀 나머지는 건너뜁니다"
+                " — 이 기계에서 bokji.net 에 닿지 못합니다")
+            break
         for pg in range(1, BOKJI_MAX_PAGES + 1):
             pairs = [("PG", pg)] + base + [
                 ("SISULDIV", sisul), ("SISULDIV", sisul),
@@ -407,7 +417,9 @@ def bokji_fetch():
                 ("SEARCH_GUBUN", gubun), ("SEARCH_KEYWORD", kw)]
             page = bokji_post(pairs)
             if not page:
+                막힘 += 1
                 break
+            막힘 = 0
             rows = bokji_parse(page)
             for r in rows:
                 got.setdefault(r["_id"], r)
