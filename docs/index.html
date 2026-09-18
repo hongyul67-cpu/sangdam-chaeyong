@@ -1,0 +1,185 @@
+<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>상담 · 행정 채용공고 (서울 · 경기 · 인천)</title><style>body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;margin:24px;color:#111;background:#fff}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#666;font-size:13px;margin-bottom:4px;line-height:1.6}
+.stamp{color:#374151;font-size:12.5px;margin:0 0 14px}
+h3{font-size:15px;margin:24px 0 10px;padding-bottom:5px;border-bottom:2px solid #111}
+.card{border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.card h2{font-size:15px;margin:0 0 6px;line-height:1.45}
+.tag{display:inline-block;background:#dbeafe;color:#1e40af;border-radius:99px;
+ padding:1px 9px;font-size:12px;margin-right:5px}
+.tag.lic{background:#fef3c7;color:#92400e;font-weight:700}
+.src{display:inline-block;background:#f3f4f6;color:#4b5563;border-radius:99px;
+ padding:1px 9px;font-size:11.5px;margin-right:5px}
+.d{color:#b91c1c;font-weight:700}
+table{border-collapse:collapse;font-size:13px;margin-top:8px}
+td{padding:2px 10px 2px 0;vertical-align:top}td.k{color:#666;white-space:nowrap}
+.none{color:#666;padding:20px;border:1px dashed #d1d5db;border-radius:10px;text-align:center}
+a{color:#1d4ed8}
+.warn{border:2px solid #b91c1c;background:#fef2f2;color:#7f1d1d;border-radius:10px;
+ padding:12px 16px;margin:0 0 16px;font-size:13px;line-height:1.65}
+.warn b{font-size:14px}
+.bar{margin:0 0 18px;display:flex;gap:8px;flex-wrap:wrap}
+.bar button{font-family:inherit;font-size:13px;padding:8px 16px;border:1px solid #111;
+ background:#111;color:#fff;border-radius:8px;cursor:pointer}
+.bar .btnlink{font-size:13px;padding:8px 16px;border:1px solid #111;background:#fff;
+ color:#111;border-radius:8px;text-decoration:none;display:inline-block}
+.bar .btnlink:hover{background:#f3f4f6}
+.tabs{display:flex;gap:6px;border-bottom:2px solid #111;margin:0 0 4px;flex-wrap:wrap}
+.tabs button{font-family:inherit;font-size:14px;font-weight:700;padding:9px 18px;
+ border:1px solid #d1d5db;border-bottom:none;background:#f3f4f6;color:#6b7280;
+ border-radius:9px 9px 0 0;cursor:pointer;position:relative;top:2px}
+.tabs button.on{background:#111;color:#fff;border-color:#111}
+table.sum{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+table.sum th{background:#f3f4f6;border:1px solid #d1d5db;padding:6px 8px;
+ text-align:left;white-space:nowrap;font-weight:700}
+table.sum td{border:1px solid #e5e7eb;padding:6px 8px;vertical-align:middle}
+table.sum tr.urgent{background:#fef2f2}
+table.sum tr.star{background:#fffbeb}
+table.sum td a{text-decoration:none;font-weight:700}
+table.sum td a:hover{text-decoration:underline}
+table.sum tr.gone{background:#f3f4f6;color:#9ca3af}
+table.sum tr.gone td{text-decoration:line-through}
+table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
+.card.gone{background:#f9fafb;border-color:#e5e7eb;opacity:.62}
+.card.gone h2{text-decoration:line-through;color:#9ca3af}
+.card.star{border-color:#f59e0b;border-width:2px}
+.gonetag{display:inline-block;background:#6b7280;color:#fff;border-radius:99px;
+ padding:1px 9px;font-size:12px;font-weight:700;margin-left:6px}
+.today{display:inline-block;background:#b91c1c;color:#fff;border-radius:99px;
+ padding:1px 9px;font-size:12px;font-weight:700}
+.newtag{display:inline-block;background:#059669;color:#fff;border-radius:99px;
+ padding:1px 9px;font-size:11.5px;font-weight:700;margin-left:6px}
+.asof{margin:10px 0 0;font-size:12.5px;color:#374151;background:#fffbeb;
+ border:1px solid #fde68a;border-radius:8px;padding:8px 10px}
+.hint{color:#666;font-size:12px;margin:6px 0 0}
+/* 폰에서는 8열이 다 들어가지 않아 기관명이 한 글자씩 쪼개진다.
+   덜 중요한 열(#·분야·고용형태)을 감추고 기관·제목에 자리를 준다. */
+@media(max-width:640px){body{margin:12px}
+ table.sum{font-size:12.5px}
+ table.sum th,table.sum td{padding:6px 5px}
+ table.sum th:nth-child(1),table.sum td:nth-child(1),
+ table.sum th:nth-child(4),table.sum td:nth-child(4),
+ table.sum th:nth-child(6),table.sum td:nth-child(6){display:none}
+ table.sum td:nth-child(2){min-width:5.2em}
+ table.sum th:nth-child(7),table.sum td:nth-child(7){white-space:nowrap;font-size:11.5px}
+ .card h2{font-size:14.5px}
+ td.k{width:4.6em}}
+@media print{body{margin:0;font-size:11pt}.bar,.noprint,.tabs{display:none!important}
+ [hidden]{display:block!important}
+ .card{break-inside:avoid;page-break-inside:avoid;border:1px solid #999}
+ .warn{border:2px solid #000;background:#fff;color:#000}
+ h3{break-after:avoid}a{color:#000;text-decoration:none}}</style>
+<h1>상담 · 행정 채용공고 (서울 · 경기 · 인천)</h1>
+<div class='sub'>2026-09-18 기준으로 <b>접수가 끝나지 않은 공고 5건</b>입니다. 마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 요건·우대에 적힌 공고가 2건</b>입니다.<br><b>월요일·목요일 아침</b>에 저절로 새로 고쳐집니다 — 이 주소만 기억해 두세요.</div>
+<div class='stamp'>🕒 마지막 갱신 2026-09-18 09:28 (한국시간) · 잡알리오·워크넷에서 87건을 훑어 5건</div>
+<div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>이 표는 잡알리오·워크넷의 공고 요약을 자동으로 모아 정리한 것입니다. <b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br><b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, 필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>
+<div class='bar'><button onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/2026-09-18/상담행정공고_2026-09-18.xlsx' download>⬇ 엑셀로 받기</a><a class='btnlink' href='https://hongyul67-cpu.github.io/sangdam-chaeyong/archive.html'>📁 지난 회차 보기</a></div>
+<h3>⭐ 청소년상담사 자격이 적힌 공고</h3>
+<table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>분야</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
+<tr class='star' data-dl='2026-09-29'><td>3</td><td><a href='#c3'>한국법무보호복지공단</a></td><td>2026년 한국법무보호복지공단 서울지부 취업지원직(육아휴직대체직) 경력경쟁채용시험 공고<span class='newtag'>NEW</span></td><td>복지</td><td>⭐</td><td>비정규직</td><td>2026-09-29</td><td class='st'>D-11</td></tr>
+<tr class='star' data-dl='2026-09-30'><td>4</td><td><a href='#c4'>한국법무보호복지공단</a></td><td>2026년 한국법무보호복지공단 신입직원 공개(경력)경쟁채용시험 공고<span class='newtag'>NEW</span></td><td>복지 · 행정</td><td>⭐</td><td>정규직</td><td>2026-09-30</td><td class='st'>D-12</td></tr>
+</table>
+<p class='hint'>공고 글자에 ‘청소년상담사’가 들어 있는 것만 따로 모았습니다. 아래 ‘한눈에 보기’에 다시 나옵니다.</p>
+<h3>한눈에 보기 — 전체 5건</h3>
+<p class='hint'>줄을 누르면 아래 상세 내용으로 바로 갑니다.</p>
+<table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>분야</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
+<tr class='urgent' data-dl='2026-09-21'><td>1</td><td><a href='#c1'>한국청소년상담복지개발원</a></td><td>제2026-3호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집<span class='newtag'>NEW</span></td><td>상담 · 청소년 · 복지</td><td></td><td>무기계약직,비정규직</td><td>2026-09-21</td><td class='st'>D-3</td></tr>
+<tr data-dl='2026-09-28'><td>2</td><td><a href='#c2'>국가아동권리보장원</a></td><td>(제2026-2호) 국가아동권리보장원 직원 채용<span class='newtag'>NEW</span></td><td>청소년 · 복지 · 행정</td><td></td><td>정규직,비정규직</td><td>2026-09-28</td><td class='st'>D-10</td></tr>
+<tr class='star' data-dl='2026-09-29'><td>3</td><td><a href='#c3'>한국법무보호복지공단</a></td><td>2026년 한국법무보호복지공단 서울지부 취업지원직(육아휴직대체직) 경력경쟁채용시험 공고<span class='newtag'>NEW</span></td><td>복지</td><td>⭐</td><td>비정규직</td><td>2026-09-29</td><td class='st'>D-11</td></tr>
+<tr class='star' data-dl='2026-09-30'><td>4</td><td><a href='#c4'>한국법무보호복지공단</a></td><td>2026년 한국법무보호복지공단 신입직원 공개(경력)경쟁채용시험 공고<span class='newtag'>NEW</span></td><td>복지 · 행정</td><td>⭐</td><td>정규직</td><td>2026-09-30</td><td class='st'>D-12</td></tr>
+<tr data-dl='2026-10-01'><td>5</td><td><a href='#c5'>건설근로자공제회</a></td><td>2026년 건설근로자공제회 제2차 채용공고[일반직(6급, 7급), 무기직(기능직, 상담직), 휴직대체(기간제<span class='newtag'>NEW</span></td><td>상담 · 행정</td><td></td><td>정규직,무기계약직,비정규직,청년인턴(체험형)</td><td>2026-10-01</td><td class='st'>D-13</td></tr>
+</table>
+<h3>상세</h3>
+<div class='card' id='c1' data-dl='2026-09-21'><h2>1. 한국청소년상담복지개발원 — 제2026-3호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-3</span><table>
+<tr><td class='k'>고용형태</td><td>무기계약직,비정규직</td></tr>
+<tr><td class='k'>근무지</td><td>경기</td></tr>
+<tr><td class='k'>학력</td><td>학력무관,중졸이하,고졸,대졸(2~3년),대졸(4년),석사,박사</td></tr>
+<tr><td class='k'>인원</td><td>5</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-09-07</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-09-21</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>자격요건</td><td>[공무직] ○ 기관운영지원직 다급 운전분야 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 환경보안관리직 경비분야 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 [기간제 휴직대체] ○ 일반직 5급(휴직대체) 치료재활분야(A) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 일반직 5급(휴직대체) 치료재활분야(B) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(휴직대체) 프로그램운영분야 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조</td></tr>
+<tr><td class='k'>우대</td><td>장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조) 장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조)</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://kyci.fairyhr.com/announcement/detail/28' target='_blank' rel='noopener'>https://kyci.fairyhr.com/announcement/detail/28</a></td></tr>
+</table></div>
+<div class='card' id='c2' data-dl='2026-09-28'><h2>2. 국가아동권리보장원 — (제2026-2호) 국가아동권리보장원 직원 채용<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-10</span><table>
+<tr><td class='k'>고용형태</td><td>정규직,비정규직</td></tr>
+<tr><td class='k'>근무지</td><td>서울,경기</td></tr>
+<tr><td class='k'>학력</td><td>학력무관,대졸(4년)</td></tr>
+<tr><td class='k'>인원</td><td>25</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-09-14</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-09-28</td></tr>
+<tr><td class='k'>자격요건</td><td>[공통 응시자격] - 성별, 연령 제한 없음(단, 임용예정일(당일 포함) 기준 보장원 정년인 만 60세 이상자는 응시 불가) - 국가아동권리보장원 「인사규정」에 따른 채용 결격사유에 해당하지 않는 자 - 「아동·청소년의 성보호에 관한 법률」 제56조, 「아동복지법」 제29조의3 및 「장애인복지법」 제59조의3의 취업제한 대상에 해당하지 않는 자 - 「병역법」 제76조의 병역의무 불이행자에 해당하지 않는 자 [채용분야 응시자격] ○ 경영전략본부총괄(개방형직위) 1급상당, 아동보호본부총괄(개방형직위) 1급상당, 아동지원본부총괄(개방형직위) 1급상당 다음 각 자격요건 중 하나 이상에 해당하는 자 - 국가 또는 지방공무원 4급직 이상에 재직한 자 - 국가 또는 지방공무원 5급에 5년 이상 재직한 자 - 공공기관 또는 정부투자기관에서 1급 상당직으로 재직한 자 - 사회복지 관련 기관 또는 임용예정부서 관련 업무 분야에서 15년 이상 근무한 자로서 부장급 이상의 경력이 있는 자 ○ 사업관리(입양기록물관리) 4급 아래의 자격요건을 모두 충족하는 자(①+②) ① 다음의 어느 하나에 따라 기록물관리 전문요원 자격증을 소지한 자 - 기록관리학 전공으로 석사학위 이상을 취득한 </td></tr>
+<tr><td class='k'>우대</td><td>○ 가점 적용 &lt;공통&gt; - 취업지원대상자: 전형별 만점의 5% 또는 10% - 장애인 1) 심한 장애: 전형별 만점의 10% 2) 심하지 않은 장애: 전형별 만점의 5% - 자립준비청년: 전형별 만점의 5% - 한국사능력검정시험 2급 이상 인증서 소지자: 서류전형 만점의 2% &lt;정규직 채용 분야&gt; - 비수도권지역인재: 서류전형 만점의 5% - 고졸자: 서류전형 만점의 5% - 청년인턴 근무경력자: 서류전형 만점의 2%(우수인턴수료자 1% 가산) - 보장원 근무경력자(채용 공고일을 기준으로 3년 이내에 보장원에 근무한 경력, 2회 이상 근무 시 근무 기간 합산 적용) 1) 6개월 이상~1년 미만 경력자: 서류전형 만점의 1% 2) 1년 이상 ~ 2년 미만 경력자: 서류전형 만점의 2% 3) 2년 이상 경력자: 서류전형 만점의 3% &lt;사업관리(전체) 분야&gt; - 공인어학능력시험(영어) 성적 소지자: 서류전형 만점의 3% 또는 2%(상세내용 공고문 참고) &lt;기관운영(경영지원(비서)) 분야&gt; - 직무관련 자격 소지자(비서 2급 이상): 서류전형 만점의 2% &lt;기관운영(정보화전략) 분야&gt; - 직무관련 자격 소지자 1</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.ncrc.or.kr/ncrc/na/ntt/selectNttInfo.do?mi=1548&amp;bbsId=1012&amp;nttSn=11054&amp;cataGori=&amp;tabName=' target='_blank' rel='noopener'>https://www.ncrc.or.kr/ncrc/na/ntt/selectNttInfo.do?mi=1548&amp;bbsId=1012&amp;nttSn=11054&amp;cataGori=&amp;tabName=</a></td></tr>
+</table></div>
+<div class='card star' id='c3' data-dl='2026-09-29'><h2>3. 한국법무보호복지공단 — 2026년 한국법무보호복지공단 서울지부 취업지원직(육아휴직대체직) 경력경쟁채용시험 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>복지</span><span class='tag lic'>⭐ 청소년상담사</span> <span class='d'>D-11</span><table>
+<tr><td class='k'>고용형태</td><td>비정규직</td></tr>
+<tr><td class='k'>근무지</td><td>서울</td></tr>
+<tr><td class='k'>학력</td><td>학력무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-09-14</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-09-29</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>자격요건</td><td>- 임용예정일에 근무가 가능한 자 - 공고일 기준 만 18세 이상 및 만 60세 이하(공단 정년) - 남성의 경우 「병역법」에 따라 병역의무 불이행 사실이 없는 자 - 성별 ? 학력 ? 거주지 제한 없음 - 공단 규정에 따라 비상대기 및 출동 가능한 자 - 공단 인사규정 등에 의한 임용결격사유에 해당되지 않는 자 [취업지원직 자격요건] 아래 자격증 중 1개 이상 취득한 자 ①직업상담사 2급 이상 ②사회복지사 2급 이상 ③청소년상담사 2급 이상</td></tr>
+<tr><td class='k'>우대</td><td>가. 장애인 : 서류전형 만점의 5% - 「장애인 고용촉진 및 직업재활법 시행령」에 의한 장애인 나. 공단 체험형 청년인턴 : 서류전형 만점의 1% ~ 2% - 우리 공단 체험형 청년인턴으로 6개월 이상 근무하여 수료한 경우 수료일로부터 2년 이내 서류전형 만점의 2%(공고문 참고) 다. 가산특전 적용 유의사항 - 가산특전은 서류전형 점수에만 적용 - 장애인 가산특전은 타 가산특전과 중복 적용 가능 - 응시자의 서류전형 점수가 만점의 40% 미만일 경우 적용 제외 - 세부 참조 사항은 공고문 참조 장애인, 한국법무보호복지공단 체험형 청년인턴</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://recruit.incruit.com/koreha' target='_blank' rel='noopener'>https://recruit.incruit.com/koreha</a></td></tr>
+</table></div>
+<div class='card star' id='c4' data-dl='2026-09-30'><h2>4. 한국법무보호복지공단 — 2026년 한국법무보호복지공단 신입직원 공개(경력)경쟁채용시험 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>복지</span><span class='tag'>행정</span><span class='tag lic'>⭐ 청소년상담사 · 전문상담 · 상담심리사</span> <span class='d'>D-12</span><table>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>근무지</td><td>서울,부산,대구,인천,대전,울산,경기,강원,충북,충남,전북,전남광주,경북,경남,제주</td></tr>
+<tr><td class='k'>학력</td><td>학력무관</td></tr>
+<tr><td class='k'>인원</td><td>21</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-09-15</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-09-30</td></tr>
+<tr><td class='k'>자격요건</td><td>&lt;공통 응시자격&gt; - 임용예정일에 근무 가능한 자 - 만 18세 이상 및 60세 이하(공단 정년) - 남성의 경우, 「병역법」에 따라 병역의무 불이행 사실이 없는 자 - 성별 · 학력 · 거주지 제한 없음 - 공단 규정에 따라 전국 순환근무, 비상대기 · 출동 가능한 자 - 공단 인사규정 등에 의한 임용결격사유에 해당되지 않는 자 ※【별첨 1】임용 결격사유 &lt;심리상담직&gt; - 다음 자격증 중 1개 이상의 자격증을 취득한 사람 ① 정신건강임상심리사 2급 이상 ② 상담심리사 2급 이상(※ 한국상담심리학회) ③ 임상심리사 2급 이상 ④ 전문상담사 2급 이상(※ 한국상담학회) &lt;취업지원직&gt; - 다음 자격증 중 1개 이상의 자격증을 취득하고, 이후 취업지원업무 수행 경력 1년 이상인 자 ① 직업상담사 2급 이상 ② 사회복지사 2급 이상 ③ 청소년상담사 2급 이상 &lt;직업훈련교사직(전기)&gt; - 「국민평생직업능력개발법」 제33조에 따른 직업능력개발훈련교사 3급(전기·전기공사) 이상 소지자</td></tr>
+<tr><td class='k'>우대</td><td>가산특전 1) 취업지원대상자 : 5% 또는 10%로 보호직(전국), 취업지원직 모집에 한함 2) 직무관련자격증 : 3% 또는 5%로 보호직에만 적용 3) 장애인 : 5%로 전 채용분야에 적용 4) 한국사능력검정시험 등급 소지자 : 1% 또는 1.5% 또는 2%로 전 채용분야에 적용 5) 한국법무보호복지공단 체험형 청년인턴 : 1% 또는 2%로 전 채용분야에 적용 * 상세사항 공고문 참조 업지원대상자, 직무 관련 자격증, 장애인, 한국사능력검정시험 등급 소지자, 한국법무보호복지공단 체험형 청년인턴 경력</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://koreha.careerlink.kr/' target='_blank' rel='noopener'>https://koreha.careerlink.kr/</a></td></tr>
+</table></div>
+<div class='card' id='c5' data-dl='2026-10-01'><h2>5. 건설근로자공제회 — 2026년 건설근로자공제회 제2차 채용공고[일반직(6급, 7급), 무기직(기능직, 상담직), 휴직대체(기간제), 체험형 청년인턴]<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>행정</span> <span class='d'>D-13</span><table>
+<tr><td class='k'>고용형태</td><td>정규직,무기계약직,비정규직,청년인턴(체험형)</td></tr>
+<tr><td class='k'>근무지</td><td>서울,부산,대구,인천,대전,경기,강원,전북,전남광주,제주</td></tr>
+<tr><td class='k'>학력</td><td>학력무관,고졸</td></tr>
+<tr><td class='k'>인원</td><td>30</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-09-15</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-10-01</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>자격요건</td><td>1. 공통자격 ㅇ 성별·어학성적 : 제한 없음 ㅇ 연령 : 당사의 정년(만 60세)에 도달하지 않는 자(입사지원서 접수 마감일 기준) ㅇ 공제회 인사규정 제22조(결격사유)에 해당하지 않는 자 ㅇ 「병역법」 제76조에서 정한 병역의무 불이행 사실이 없는 자 ㅇ 해당분야 직무 수행이 가능한 자 ㅇ 전 분야별(직군?채용분야 및 근무지) 중복지원 불가(중복지원 확인 시 서류전형 불합격 처리) 2. 세부자격 ㅇ (일반직 6급) 일반행정(일반) - 공통 자격 요건 이외 제한 없음 ㅇ (일반직 6급) 일반행정(보훈) - ?국가유공자 등 예우 및 지원에 관한 법률? 등 보훈관계법률에 따른 취업지원대상자 ㅇ (일반직 7급) 일반행정(일반) - 고등학교 졸업자(입사지원서 접수 마감일 기준) 주1) 고등학교 검정고시 합격자 및 대학 중퇴자는 지원 가능 주2) 고등학교 졸업예정자, 대학(전문대 포함) 졸업(예정)자·재학생·휴학생 등 지원 불가 ㅇ (무기계약직_기능직(L5)) 차량운전원 -제1종 대형 운전면허 소지자 - 해당분야에서 6년 이상 근무한 경력*이 있는 자로 해당분야 직무 수행이 가능한 자 * 국가, 지자체, 공공기관, 법인 등에 소속되어 차량운전 업무를 주 업무로 한</td></tr>
+<tr><td class='k'>우대</td><td>ㅇ 국가유공자 등 예우 및 지원에 관한 법률? 등 보훈관계법률에 따른 취업지원대상자 가점(서류, 필기, 면접) ㅇ 장애인 고용촉진 및 직업 재활법 시행령? 제3조에 해당하는 자 가점(서류, 필기) ㅇ 공제회에서 인턴을 수료한 자 또는 공제회와 근로계약을 체결한 비정규직으로 6개월 이상 근로한 자 가점(서류) ㅇ 「국민기초생활 보장법」 제2조 제2호에 따른 기초생활수급자(서류) ㅇ 공고마감일 기준 「아동복지법」에 따른 보호조치가 종료되거나 보호시설을 퇴소한 자(서류) ㅇ「북한이탈주민의 보호 및 정착지원에 관한 법률」 제2조 제1호에 따른북한이탈주민(서류) ㅇ「다문화가족지원법」 제2조에 의한 정의 중 외국출신으로 대한민국 국적을 취득한 본인 또는 직계 자녀(서류) ※ 세부내용 공고문 참조 국가보훈 관계법령에 따른 보훈 대상자, 관계법령에 따른 장애인, 공제회 인턴 수료자 또는 6개월 이상 비정규직에 근무한 자, 관계법령에 따른 국민 기초생활 수급자, 자립준비청년, 관계법령에 따른 북한이탈주민, 다문화 가족</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://cw.careerlink.kr' target='_blank' rel='noopener'>https://cw.careerlink.kr</a></td></tr>
+</table></div>
+<script>
+(function(){
+  function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  var now=new Date(); var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  function left(v){ if(!/^\d{4}-\d{2}-\d{2}$/.test(v)) return null;
+    var p=v.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]);
+    return Math.round((d-today)/86400000); }
+  var gone=0, open=0;
+  document.querySelectorAll('tr[data-dl]').forEach(function(tr){
+    var n=left(tr.getAttribute('data-dl')); var cell=tr.querySelector('td.st'); if(n===null) return;
+    if(n<0){ gone++; tr.classList.add('gone'); tr.classList.remove('urgent');
+      if(cell){cell.textContent=''; var b=document.createElement('span');
+        b.className='gonetag'; b.textContent='마감됨'; cell.appendChild(b);} }
+    else { open++;
+      if(cell){ cell.textContent='';
+        if(n===0){ var t=document.createElement('span'); t.className='today';
+          t.textContent='오늘 마감'; cell.appendChild(t); }
+        else { cell.textContent='D-'+n; } }
+      if(n<=7) tr.classList.add('urgent'); }
+  });
+  document.querySelectorAll('.card[data-dl]').forEach(function(c){
+    var n=left(c.getAttribute('data-dl')); if(n===null) return;
+    var d=c.querySelector('.d');
+    if(n<0){ c.classList.add('gone');
+      if(d){ d.textContent=''; var b=document.createElement('span'); b.className='gonetag';
+        b.textContent='마감됨 — 지금은 지원할 수 없습니다'; d.appendChild(b); } }
+    else if(d){ d.textContent = (n===0? '오늘 마감' : 'D-'+n); }
+  });
+  var sub=document.querySelector('.stamp');
+  if(sub){ var p=document.createElement('div'); p.className='asof';
+    p.innerHTML='📅 <b>오늘('+ymd(today)+') 기준으로 다시 계산했습니다.</b> '+
+      (gone? '이 중 <b>'+gone+'건은 이미 마감</b>되어 회색으로 표시했습니다. ':'')+
+      '마감일·자격은 기관 공고가 기준이며, 이 표와 다를 수 있습니다.';
+    sub.parentNode.insertBefore(p, sub.nextSibling); }
+})();
+</script>
