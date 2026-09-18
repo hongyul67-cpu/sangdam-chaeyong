@@ -1033,6 +1033,37 @@ def main():
     live = [r for r in kept
             if (dday(r.get("접수마감"), today) is None) or dday(r.get("접수마감"), today) >= 0]
 
+    # 이번에 **못 받아온 자료원**의 공고도, 아직 접수 중이면 화면에 남긴다.
+    #   복지넷은 해외 IP(깃허브 서버)에서 열리지 않는다. 그대로 두면 깃허브가 돌 때마다
+    #   노트북에서 받아 둔 센터 공고가 화면에서 사라진다(실제로 9건 → 5건이 됐다).
+    #   지난번에 받아 둔 것을 마감일까지 붙들고 있으면, 노트북에서 가끔 한 번 돌리는 것만으로
+    #   센터 공고가 계속 보인다.
+    있는것 = {r["_id"] for r in kept}
+    되살림 = 0
+    for k, v in load_json(HIST_PATH, {}).items():
+        if k in 있는것:
+            continue
+        if v.get("접수마감"):
+            n = dday(v["접수마감"], today)
+            if n is None or n < 0:
+                continue
+        else:
+            # '채용시까지' 처럼 마감일이 없는 공고. 영원히 붙들 수는 없으니
+            # 처음 본 날로부터 45일까지만 남긴다.
+            처음 = v.get("처음본날") or ""
+            if not 처음 or dday(처음, today) is None or dday(처음, today) < -45:
+                continue
+        r = {x: y for x, y in v.items() if not x.startswith("_")}
+        r["_id"] = k
+        normalize(r)
+        ok, _ = keep(r)
+        if ok:
+            r["_묵은것"] = True
+            live.append(r)
+            되살림 += 1
+    if 되살림:
+        log("지난번에 받아 둔 공고 %d건을 화면에 함께 남깁니다(아직 접수 중)" % 되살림)
+
     stamp = today.isoformat()
     day_dir = os.path.join(FILES_DIR, stamp)
     os.makedirs(day_dir, exist_ok=True)
@@ -1059,7 +1090,7 @@ def main():
 
     # 누적 이력(사람이 볼 일은 없지만, 나중에 통계를 내려면 필요하다)
     hist = load_json(HIST_PATH, {})
-    for r in kept:
+    for r in kept + [x for x in live if x.get("_묵은것")]:
         hist[r["_id"]] = {k: v for k, v in r.items() if not k.startswith("_")}
         hist[r["_id"]]["분야"] = " · ".join(r["_tags"])
         hist[r["_id"]]["청소년상담사"] = "⭐" if r["_star"] else ("○" if r["_lic"] else "")
