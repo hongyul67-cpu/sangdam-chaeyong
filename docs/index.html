@@ -74,10 +74,10 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  .warn{border:2px solid #000;background:#fff;color:#000}
  h3{break-after:avoid}a{color:#000;text-decoration:none}}</style>
 <h1>상담 · 행정 채용공고 (노원 기준 출퇴근권)</h1>
-<div class='sub'>2026-09-18 기준으로 <b>접수가 끝나지 않은 공고 9건</b>입니다. 마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 요건·우대에 적힌 공고가 2건</b>입니다.<br><b>월요일·목요일 아침</b>에 저절로 새로 고쳐집니다 — 이 주소만 기억해 두세요.</div>
-<div class='stamp'>🕒 마지막 갱신 2026-09-18 10:24 (한국시간) · 잡알리오·복지넷에서 260건을 훑어 134건</div>
+<div class='sub'>2026-09-18 기준으로 <b>접수가 끝나지 않은 공고 9건</b>입니다. 마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 요건·우대에 적힌 공고가 2건</b>입니다.<br><b>월요일·목요일</b>에 저절로 새로 고쳐집니다. 주소는 늘 같으니, <b>🔗 링크 보내기</b>로 한 번 보내 두면 받는 분도 계속 최신으로 보게 됩니다.</div>
+<div class='stamp'>🕒 마지막 갱신 2026-09-18 10:29 (한국시간) · 잡알리오·복지넷에서 260건을 훑어 134건</div>
 <div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>이 표는 잡알리오·복지넷의 공고 요약을 자동으로 모아 정리한 것입니다. <b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br><b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, 필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>
-<div class='bar'><button onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/2026-09-18/상담행정공고_2026-09-18.xlsx' download>⬇ 엑셀로 받기</a><a class='btnlink' href='https://hongyul67-cpu.github.io/sangdam-chaeyong/archive.html'>📁 지난 회차 보기</a></div>
+<div class='bar'><button onclick='share()'>🔗 이 화면 링크 보내기</button><button class='ghost' onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/상담행정공고_최신.xlsx' download>⬇ 엑셀 받기 (늘 최신)</a><a class='btnlink' href='https://hongyul67-cpu.github.io/sangdam-chaeyong/archive.html'>📁 지난 회차 보기</a></div>
 <h3>⭐ 청소년상담사 자격이 적힌 공고</h3>
 <table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>근무지</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
 <tr class='star' data-dl='2026-09-29'><td>1</td><td><a href='#c1'>한국법무보호복지공단</a></td><td>2026년 한국법무보호복지공단 서울지부 취업지원직(육아휴직대체직) 경력경쟁채용시험 공고</td><td><span class='zone z2'>서울권</span> 서울</td><td>⭐</td><td>비정규직</td><td>2026-09-29</td><td class='st'>D-11</td></tr>
@@ -192,6 +192,26 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 <tr><td class='k'>접수마감</td><td>2026-10-01</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1068302' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1068302</a></td></tr>
 </table></div>
+<script>
+function share(){
+  var url = "https://hongyul67-cpu.github.io/sangdam-chaeyong/";
+  var NL = String.fromCharCode(10);   // 역슬래시 이스케이프를 쓰지 않는다 —
+  var msg = '상담·행정 채용공고 (월·목 자동 갱신)';   // 파이썬을 거치며 진짜 줄바꿈이 돼 버렸다
+  if (navigator.share) {
+    navigator.share({title: msg, text: msg, url: url}).catch(function(){});
+    return;
+  }
+  var 안내 = '링크를 복사했습니다.' + NL + NL + url + NL + NL +
+             '붙여넣기로 보내세요. 이 주소는 월·목에 저절로 새로 고쳐집니다.';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(
+      function(){ alert(안내); },
+      function(){ prompt('아래 주소를 복사해 보내세요', url); });
+    return;
+  }
+  prompt('아래 주소를 복사해 보내세요', url);
+}
+</script>
 <script>
 (function(){
   function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}

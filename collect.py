@@ -181,11 +181,26 @@ def _load_env():
 _load_env()
 
 
+LOG_KEEP = 400          # 로그는 최근 이만큼만 남긴다
+
+
 def log(msg):
     line = "[%s] %s" % (dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), msg)
     print(line)
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(line + "\n")
+
+
+def trim_log():
+    """로그가 끝없이 자라면 깃허브 봇과 이 컴퓨터의 결과가 늘 크게 겹친다."""
+    try:
+        with open(LOG_PATH, encoding="utf-8") as f:
+            lines = f.readlines()
+    except OSError:
+        return
+    if len(lines) > LOG_KEEP:
+        with open(LOG_PATH, "w", encoding="utf-8") as f:
+            f.writelines(lines[-LOG_KEEP:])
 
 
 def run_stamp():
@@ -319,12 +334,25 @@ def alio_row(rec):
 
 
 # ─────────────────────────── 복지넷 ───────────────────────────
-def bokji_post(pairs, timeout=30):
-    """복지넷 목록을 POST 로 받아 온다."""
+def bokji_post(pairs, timeout=20, tries=3):
+    """복지넷 목록을 POST 로 받아 온다.
+
+    학교 망의 DNS 가 이따금 흔들려 `getaddrinfo failed` 가 난다. 진짜로 막힌 게
+    아니라 잠깐 못 찾은 것뿐이라(같은 순간에 curl 은 0.5초 만에 200을 받았다),
+    바로 포기하지 않고 몇 초 쉬었다 다시 부른다.
+    """
     body = urllib.parse.urlencode(pairs).encode()
     req = urllib.request.Request(BOKJI_LIST, data=body, headers={
         "User-Agent": UA, "Referer": BOKJI_LIST,
         "Content-Type": "application/x-www-form-urlencoded"})
+    for 번째 in range(tries):
+        try:
+            with _urlopen(req, timeout) as r:
+                return r.read().decode("utf-8", "ignore")
+        except Exception:                        # noqa: BLE001, S110
+            if 번째 < tries - 1:
+                time.sleep(2 * (번째 + 1))
+                continue
     try:
         with _urlopen(req, timeout) as r:
             return r.read().decode("utf-8", "ignore")
@@ -823,6 +851,31 @@ RECALC_JS = r"""<script>
 esc = lambda s: html.escape(str(s or ""))
 
 
+# '이 화면 링크 보내기' — 폰에서는 카톡·문자 공유창이 뜨고, PC 에서는 주소가 복사된다.
+# 링크는 늘 같은 주소이고 월·목에 저절로 새로 고쳐지므로, 한 번 보내 두면 계속 최신이다.
+SHARE_JS = """<script>
+function share(){
+  var url = %s;
+  var NL = String.fromCharCode(10);   // 역슬래시 이스케이프를 쓰지 않는다 —
+  var msg = '상담·행정 채용공고 (월·목 자동 갱신)';   // 파이썬을 거치며 진짜 줄바꿈이 돼 버렸다
+  if (navigator.share) {
+    navigator.share({title: msg, text: msg, url: url}).catch(function(){});
+    return;
+  }
+  var 안내 = '링크를 복사했습니다.' + NL + NL + url + NL + NL +
+             '붙여넣기로 보내세요. 이 주소는 월·목에 저절로 새로 고쳐집니다.';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(
+      function(){ alert(안내); },
+      function(){ prompt('아래 주소를 복사해 보내세요', url); });
+    return;
+  }
+  prompt('아래 주소를 복사해 보내세요', url);
+}
+</script>""" % json.dumps(SITE_URL)
+
+
+
 def sort_key(r, today):
     """⭐ 먼저 → 가까운 곳 먼저 → 마감 임박순. 마감일이 없는 건 뒤로."""
     n = dday(r.get("접수마감"), today)
@@ -904,7 +957,8 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
         sub = ("%s 기준으로 <b>접수가 끝나지 않은 공고 %d건</b>입니다. "
                "마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 "
                "요건·우대에 적힌 공고가 %d건</b>입니다.<br>"
-               "<b>월요일·목요일 아침</b>에 저절로 새로 고쳐집니다 — 이 주소만 기억해 두세요."
+               "<b>월요일·목요일</b>에 저절로 새로 고쳐집니다. 주소는 늘 같으니, "
+               "<b>🔗 링크 보내기</b>로 한 번 보내 두면 받는 분도 계속 최신으로 보게 됩니다."
                % (today.isoformat(), len(rows), len(star)))
     else:
         head = "새로 올라온 공고 (%s)" % today.isoformat()
@@ -928,7 +982,8 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
         "필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>")
 
     bar = ["<div class='bar'>",
-           "<button onclick='window.print()'>🖨 인쇄 / PDF로 저장</button>"]
+           "<button onclick='share()'>🔗 이 화면 링크 보내기</button>",
+           "<button class='ghost' onclick='window.print()'>🖨 인쇄 / PDF로 저장</button>"]
     for label, href in (downloads or []):
         bar.append("<a class='btnlink' href='%s' download>⬇ %s</a>" % (esc(href), esc(label)))
     arc = (SITE_URL + "archive.html") if mode == "open" else "archive.html"
@@ -956,6 +1011,7 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
     parts.append("<h3>상세</h3>")
     _cards(parts, rows, today, new_ids)
 
+    parts.append(SHARE_JS)
     parts.append(RECALC_JS)
     save_text(path, "\n".join(parts))
 
@@ -1067,9 +1123,12 @@ def main():
     stamp = today.isoformat()
     day_dir = os.path.join(FILES_DIR, stamp)
     os.makedirs(day_dir, exist_ok=True)
-    write_xlsx(sorted(live, key=lambda r: sort_key(r, today)),
-               os.path.join(day_dir, "상담행정공고_%s.xlsx" % stamp), today, "공고")
-    downloads = [("엑셀로 받기", "files/%s/상담행정공고_%s.xlsx" % (stamp, stamp))]
+    정렬된 = sorted(live, key=lambda r: sort_key(r, today))
+    write_xlsx(정렬된, os.path.join(day_dir, "상담행정공고_%s.xlsx" % stamp), today, "공고")
+    # 남에게 건네준 링크가 끊기지 않도록, 늘 같은 이름의 '최신' 엑셀도 만든다.
+    # 날짜가 붙은 파일은 그날의 기록으로 남기고, 이 파일은 매번 덮어쓴다.
+    write_xlsx(정렬된, os.path.join(FILES_DIR, "상담행정공고_최신.xlsx"), today, "공고")
+    downloads = [("엑셀 받기 (늘 최신)", "files/상담행정공고_최신.xlsx")]
 
     stats = "잡알리오·복지넷에서 %d건을 훑어 %d건" % (len(raw), len(kept))
     write_page(os.path.join(DOCS_DIR, "index.html"), live, today, updated,
@@ -1101,6 +1160,7 @@ def main():
               "%s / 받아온 %d건 / 남긴 %d건 / 신규 %d건\n"
               % (updated, len(raw), len(kept), len(new_ids)))
     log("끝 — 지금 지원 가능 %d건, 신규 %d건" % (len(live), len(new_ids)))
+    trim_log()
 
 
 if __name__ == "__main__":
