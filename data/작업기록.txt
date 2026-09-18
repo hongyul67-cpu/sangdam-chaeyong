@@ -1,22 +1,3 @@
-﻿**********************
-Windows PowerShell 기록 시작
-시작 시간: 20260918102003
-사용자 이름: DESKTOP-CGUMR0T\user
-RunAs 사용자: DESKTOP-CGUMR0T\user
-구성 이름: 
-Machine: DESKTOP-CGUMR0T (Microsoft Windows NT 10.0.26200.0)
-호스트 응용 프로그램: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\user\Desktop\claude code\sangdam-chaeyong\run.ps1 -Auto
-프로세스 ID: 22028
-PSVersion: 5.1.26100.9168
-PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9168
-BuildVersion: 10.0.26100.9168
-CLRVersion: 4.0.30319.42000
-WSManStackVersion: 3.0
-PSRemotingProtocolVersion: 2.3
-SerializationVersion: 1.1.0.1
-**********************
-
-===== 상담·행정 채용공고 수집 =====
-  시작 2026-09-18 10:20:03
-
+﻿===== 상담·행정 채용공고 수집 : 2026-09-18 10:22:34 =====
+10:22:34  깃허브에서 최신 내용을 받는 중
+10:22:35    (지난번 결과물이 남아 있어 먼저 담아 둡니다)
