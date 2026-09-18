@@ -15,9 +15,9 @@
 키는 깃허브에서는 저장소 시크릿으로, 내 노트북에서는 같은 폴더의 .env 로 준다.
 
 주의
-  - 워크넷은 http 로 부른다. https 로는 못 받는다 — 서버 인증서에 Authority Key Identifier 가
-    빠져 있어 요즘 OpenSSL 이 검증을 거부한다(이 노트북도, 깃허브 서버도 같다).
-    주고받는 값에 개인정보가 없어 http 로도 문제되지 않는다.
+  - 워크넷은 http 로 부른다. 이 노트북에서 https 가 막혔었는데, 알고 보니 서버 탓이
+    아니라 학교 망의 TLS 검사 장비 때문이었다(아래 _urlopen 주석 참고).
+    깃허브에서는 https 도 될 가능성이 크다 — 키가 생기면 확인해 볼 것.
   - 로그는 공개 저장소에 그대로 올라간다. 인증키가 붙은 주소는 어떤 경우에도 찍지 않는다.
 """
 import datetime as dt
@@ -25,7 +25,10 @@ import html
 import json
 import os
 import re
+import ssl
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -50,9 +53,9 @@ HIST_PATH = os.path.join(DATA_DIR, "history.json")
 SITE_URL = "https://hongyul67-cpu.github.io/sangdam-chaeyong/"
 
 # 어느 지역을 볼지. 잡알리오 코드와 워크넷 코드가 서로 다르다.
-REGIONS_ALIO = "R3010,R3017,R3011"          # 서울 · 경기 · 인천
+REGIONS_ALIO = "R3010,R3017"                # 서울 · 경기 (인천은 노원에서 출퇴근이 안 된다)
 REGIONS_WORK = "11000|41000|28000"          # 서울 · 경기 · 인천
-REGION_LABEL = "서울 · 경기 · 인천"
+REGION_LABEL = "노원 기준 출퇴근권"
 # 잡알리오가 지역을 안 걸러 줄 때를 대비한 2차 그물(응답의 근무지 글자로 한 번 더 거른다)
 REGION_WORDS = ["서울", "경기", "인천", "전국"]
 
@@ -111,7 +114,36 @@ ORG_WORDS = ["청소년", "상담", "가족", "아동", "심리", "복지관",
 
 # 제목에 이 낱말이 있으면 뺀다. 상담사 자리가 아니다.
 SKIP_WORDS = ["미화", "경비원", "청소원", "조리", "당직", "운전원", "시설관리원",
-              "보안", "수위", "영양사", "간호", "의사", "약사", "사서보조"]
+              "보안", "수위", "영양사", "간호", "의사", "약사", "사서보조",
+              "관리인", "요양보호사", "생활지도원", "생활지원", "시설원예"]
+
+# ── 노원 기준 출퇴근 권역 ────────────────────────────────
+# 근무지 글자에서 시·군·구를 찾아 가까운 순으로 올려 준다. 버리지는 않는다 —
+# 조금 멀어도 조건이 좋은 자리가 있을 수 있어 판단은 사람이 한다.
+#   순서대로 검사한다. 어디에도 안 걸리면 **권역 밖이라 버린다** — 인천·충청 등.
+#   서울은 어느 구든 지하철로 다닐 만하니 통째로 2단계에 둔다.
+ZONES = [
+    (1, "가까움", ["노원", "도봉", "강북", "중랑", "성북", "동대문", "광진",
+                   "의정부", "남양주", "구리", "양주", "동두천", "포천"]),
+    (2, "서울권", ["서울"]),
+    (3, "먼 편", ["경기", "고양", "하남", "성남", "구리", "김포", "파주",
+                  "부천", "광명", "안양", "수원", "용인", "시흥", "군포"]),
+]
+ZONE_OUT = (9, "권역 밖")
+
+# ── 복지넷(한국사회복지협의회) ────────────────────────────
+# 시·군·구 청소년상담복지센터·꿈드림·건강가정지원센터 공고가 여기로 모인다.
+# 잡알리오(공공기관만)로는 절대 안 잡히는 자리들이다.
+#
+# ⚠ 남의 집이니 조심해서 쓴다.
+#   · robots.txt 가 `/*?`(쿼리가 붙은 주소)를 막고 있다. 목록은 POST 라 해당이
+#     없지만, 상세 페이지(?ID=…)는 **긁지 않고 링크만 건다.**
+#   · 요청 사이를 1초 쉬고, 주 2회만 돈다.
+BOKJI_LIST = "https://www.bokji.net/job/off/01.bokji"
+BOKJI_VIEW = "https://www.bokji.net/job/off/01_01.bokji?ID=%s"
+BOKJI_REGIONS = [("11000", "서울"), ("41000", "경기")]
+BOKJI_KEYWORDS = ["상담", "청소년", "꿈드림", "심리", "학교밖", "동반자"]
+BOKJI_MAX_PAGES = 3
 
 WORK_URL = "http://openapi.work.go.kr/opi/opi/opia/wantedApi.do"
 ALIO_API = "https://apis.data.go.kr/1051000/recruitment"
@@ -169,9 +201,35 @@ def _alio_key():
     return key
 
 
+# ── 인증서 검증 ────────────────────────────────────────────
+# 학교 망에는 TLS 를 들여다보는 검사 장비가 있어서, 파이썬이 어떤 주소도
+# 검증하지 못한다(구글조차 'self-signed certificate' 로 거절된다. 장비가 끼워
+# 넣는 인증서에 Authority Key Identifier 가 없어 요즘 OpenSSL 이 막는다).
+# 깃허브 서버에는 그런 장비가 없어 정상으로 검증된다.
+# 그래서 **먼저 제대로 검증해 보고, 그게 막히는 기계에서만** 검증을 접는다.
+# 읽기만 하고 개인정보를 보내지 않으므로 이 정도는 감수한다. 접었으면 로그에 남긴다.
+_INSECURE = False
+_NOVERIFY = ssl.create_default_context()
+_NOVERIFY.check_hostname = False
+_NOVERIFY.verify_mode = ssl.CERT_NONE
+
+
+def _urlopen(req, timeout):
+    global _INSECURE
+    if not _INSECURE:
+        try:
+            return urllib.request.urlopen(req, timeout=timeout)
+        except urllib.error.URLError as e:
+            if not isinstance(getattr(e, "reason", None), ssl.SSLCertVerificationError):
+                raise
+            _INSECURE = True
+            log("  ⚠ 이 기계는 인증서 검증이 안 됩니다(망의 검사 장비) — 검증 없이 받습니다")
+    return urllib.request.urlopen(req, timeout=timeout, context=_NOVERIFY)
+
+
 def _get(url, timeout=25):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
+    with _urlopen(req, timeout) as r:
         return r.read().decode("utf-8", "ignore")
 
 
@@ -260,10 +318,113 @@ def alio_row(rec):
     }
 
 
+# ─────────────────────────── 복지넷 ───────────────────────────
+def bokji_post(pairs, timeout=30):
+    """복지넷 목록을 POST 로 받아 온다."""
+    body = urllib.parse.urlencode(pairs).encode()
+    req = urllib.request.Request(BOKJI_LIST, data=body, headers={
+        "User-Agent": UA, "Referer": BOKJI_LIST,
+        "Content-Type": "application/x-www-form-urlencoded"})
+    try:
+        with _urlopen(req, timeout) as r:
+            return r.read().decode("utf-8", "ignore")
+    except Exception as e:                       # noqa: BLE001
+        log("  복지넷 호출 실패: %s" % type(e).__name__)
+        return ""
+
+
+_TAG = re.compile(r"<[^>]+>")
+
+
+def _clean(x):
+    return re.sub(r"\s+", " ", html.unescape(_TAG.sub(" ", x))).strip()
+
+
+def bokji_parse(page):
+    """목록 HTML 한 장 → 공고 여러 줄."""
+    body = re.search(r"<tbody.*?</tbody>", page, re.S)
+    if not body:
+        return []
+    out = []
+    for tr in re.findall(r"<tr.*?</tr>", body.group(0), re.S):
+        tds = re.findall(r"<td.*?</td>", tr, re.S)
+        if len(tds) < 5:
+            continue
+        m = re.search(r"goView\('(\d+)'\)", tr)
+        if not m:
+            continue
+        no = m.group(1)
+        주관 = re.search(r'<span class="crop">(.*?)</span>', tds[2], re.S)
+        제목 = re.search(r'<p class="tit">.*?<a[^>]*>(.*?)</a>', tds[2], re.S)
+        상세 = re.findall(r"<li[^>]*>(.*?)</li>", tds[2], re.S)
+        기간 = _clean(tds[4]).split("~")
+        out.append({
+            "_id": "bokji:" + no,
+            "출처": "복지넷",
+            "기관명": _clean(주관.group(1)) if 주관 else "",
+            "제목": re.sub(r"^\[끌어올림\]\s*", "", _clean(제목.group(1)) if 제목 else ""),
+            # 시설분야("아동/청소년")는 일부러 분야원문에 넣지 않는다 —
+            # 넣으면 보육원·키움센터까지 전부 '청소년 자리'로 통과해 버린다.
+            "분야원문": "",
+            "시설분야": _clean(tds[1]),
+            "고용형태": _clean(상세[1]) if len(상세) > 1 else "",
+            "근무지": _clean(상세[0]) if 상세 else "",
+            "학력": "",
+            "경력": _clean(상세[2]) if len(상세) > 2 else "",
+            "인원": _clean(tds[3]),
+            "자격": "", "우대": "",
+            "접수시작": _dashify(기간[0]),
+            "접수마감": _dashify(기간[1]) if len(기간) > 1 else "",
+            "링크": BOKJI_VIEW % no,
+            "상세": "", "대체인력": "",
+            "마감표시": "모집종료" in tds[2],
+        })
+    return out
+
+
+def bokji_fetch():
+    """복지넷에서 수도권 상담·청소년 공고를 모아 온다."""
+    today = dt.date.today()
+    base = [("ID", ""), ("UP_REGION_CODE", ""), ("REGION_CODE2", ""),
+            ("WORK_TYPE", ""), ("CAREERDIV", ""),
+            ("START_DATE", (today - dt.timedelta(days=LOOKBACK_DAYS)).isoformat()),
+            ("END_DATE", (today + dt.timedelta(days=180)).isoformat()),
+            ("SORT", "2")]                      # 마감임박순
+    got = {}
+    # ① 지역별 '아동·청소년' 시설 전체 (그 기관의 행정직까지 잡으려고)
+    # ② 지역별 낱말 검색 (여성·정신보건 상담소 등 다른 분야까지)
+    plans = []
+    for code, name in BOKJI_REGIONS:
+        plans.append((name + "·아동청소년", code, "A", "", ""))
+        for kw in BOKJI_KEYWORDS:
+            plans.append((name + "·" + kw, code, "", "REQUIREFIELD", kw))
+
+    for label, region, sisul, gubun, kw in plans:
+        for pg in range(1, BOKJI_MAX_PAGES + 1):
+            pairs = [("PG", pg)] + base + [
+                ("SISULDIV", sisul), ("SISULDIV", sisul),
+                ("REGION_CODE1", region),
+                ("SEARCH_GUBUN", gubun), ("SEARCH_KEYWORD", kw)]
+            page = bokji_post(pairs)
+            if not page:
+                break
+            rows = bokji_parse(page)
+            for r in rows:
+                got.setdefault(r["_id"], r)
+            if pg == 1:
+                log("  복지넷 %s → %d건" % (label, len(rows)))
+            if len(rows) < 10:                  # 한 장에 10건. 덜 오면 마지막 장이다
+                break
+            time.sleep(1.0)                     # 남의 집이니 천천히
+        time.sleep(1.0)
+    log("  복지넷 합계 %d건(중복 제거 후)" % len(got))
+    return list(got.values())
+
+
 # ─────────────────────────── 워크넷 ───────────────────────────
-# ⚠ 주소가 http 인 것은 실수가 아니다. https 로 부르면 인증서 검증에서 막힌다
-#   (CERTIFICATE_VERIFY_FAILED: Missing Authority Key Identifier — 서버 쪽 문제).
-#   2026-09-17 에 이 노트북과 curl 양쪽에서 확인했다.
+# ⚠ 주소가 http 인 것은 실수가 아니다 — 이 노트북에서 https 가 막혀서 그렇게 뒀다.
+#   다만 2026-09-18 에 원인이 밝혀졌다: 서버가 아니라 **학교 망의 TLS 검사 장비** 탓이다.
+#   깃허브에서는 https 로도 될 수 있으니, 워크넷 키가 생기면 https 로 바꿔 시험해 볼 것.
 #
 # 워크넷은 상담·청소년 자리를 가장 많이 담고 있다(시·군·구 청소년상담복지센터,
 # 꿈드림, 건강가정지원센터 등). 다만 검색어를 주지 않으면 수도권 공고가 수만 건이라,
@@ -388,10 +549,9 @@ def keep(row):
     if any(w in title for w in SKIP_WORDS):
         return False, "제외낱말"
 
-    # 지역 2차 그물. 잡알리오는 근무지를 비워 보내는 일이 있어 비었으면 통과시킨다.
-    지역 = row.get("근무지", "") + " " + row.get("기관명", "")
-    if 지역.strip() and not any(w in 지역 for w in REGION_WORDS):
-        return False, "지역밖"
+    # 출퇴근 권역. 근무지를 비워 보내는 공고가 있어, 비었으면 버리지 않고 통과시킨다.
+    if row.get("근무지", "").strip() and row.get("_zone", 9) == 9:
+        return False, "출퇴근 권역 밖"
 
     # ⭐ 공고에 '청소년상담사'가 실제로 적혀 있으면 무조건 담는다. 이 도구의 핵심이다.
     if row["_star"]:
@@ -409,12 +569,47 @@ def keep(row):
     return False, "무관한 자리"
 
 
+def zone_of(row):
+    """노원에서 얼마나 가까운가. (순위, 이름표) — 시·군·구를 못 찾으면 '먼 편'."""
+    where = (row.get("근무지") or "") + " " + (row.get("기관명") or "")
+    for rank, label, words in ZONES:
+        if any(w in where for w in words):
+            return rank, label
+    return ZONE_OUT
+
+
 def normalize(row):
     row["_tags"] = tags_of(row)
     star, found = license_hit(row)
     row["_star"] = star
     row["_lic"] = found
+    row["_zone"], row["_zonelabel"] = zone_of(row)
     return row
+
+
+def dedupe_key(row):
+    """같은 자리가 '재공고'·'끌어올림'으로 여러 번 올라온다. 하나로 묶을 열쇠."""
+    기관 = row.get("기관명", "")
+    제목 = row.get("제목", "")
+    if 기관 and 기관 in 제목:               # '[양천해누리복지관] 심리운동사…' 같은 꼴
+        제목 = 제목.replace(기관, "")
+    제목 = re.sub(r"재재공고|재공고|재모집|공고문|공고|채용|모집|안내", "", 제목)
+    제목 = re.sub(r"[\s\[\]()<>·,\.'\"-]", "", 제목)
+    return (기관, 제목[:30])
+
+
+def merge_into(a, b):
+    """같은 공고 두 줄을 합친다. 빈 칸은 채우고, 더 자세한 쪽을 남긴다."""
+    for k in ("기관명", "제목", "근무지", "고용형태", "학력", "경력", "인원",
+              "자격", "우대", "분야원문", "시설분야"):
+        av, bv = (a.get(k) or ""), (b.get(k) or "")
+        if len(bv) > len(av):               # '서울특별시' 보다 '서울특별시 노원구'
+            a[k] = bv
+    for k in ("접수마감", "접수시작"):       # 더 늦은 날짜(=새로 올린 공고)
+        if (b.get(k) or "") > (a.get(k) or ""):
+            a[k] = b[k]
+    if not a.get("링크"):
+        a["링크"] = b.get("링크", "")
 
 
 def dday(마감, today):
@@ -548,6 +743,11 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  padding:1px 9px;font-size:12px;font-weight:700}
 .newtag{display:inline-block;background:#059669;color:#fff;border-radius:99px;
  padding:1px 9px;font-size:11.5px;font-weight:700;margin-left:6px}
+.zone{display:inline-block;border-radius:99px;padding:1px 7px;font-size:11.5px;
+ font-weight:700;margin-right:4px;white-space:nowrap}
+.zone.z1{background:#dcfce7;color:#166534}
+.zone.z2{background:#e0e7ff;color:#3730a3}
+.zone.z3{background:#f3f4f6;color:#6b7280}
 .asof{margin:10px 0 0;font-size:12.5px;color:#374151;background:#fffbeb;
  border:1px solid #fde68a;border-radius:8px;padding:8px 10px}
 .hint{color:#666;font-size:12px;margin:6px 0 0}
@@ -612,9 +812,10 @@ esc = lambda s: html.escape(str(s or ""))
 
 
 def sort_key(r, today):
-    """마감 임박순. 마감일이 없는 건 뒤로."""
+    """⭐ 먼저 → 가까운 곳 먼저 → 마감 임박순. 마감일이 없는 건 뒤로."""
     n = dday(r.get("접수마감"), today)
-    return (n is None, n if n is not None else 9999, r.get("기관명", ""))
+    return (0 if r.get("_star") else 1, r.get("_zone", 3),
+            n is None, n if n is not None else 9999, r.get("기관명", ""))
 
 
 def _cards(parts, rows, today, new_ids):
@@ -634,7 +835,12 @@ def _cards(parts, rows, today, new_ids):
                r["_no"], esc(r.get("기관명")), esc(r.get("제목")), newtag,
                esc(r.get("출처")), tags,
                "<span class='d'>%s</span>" % esc(label) if label else ""))
-        for k in ("고용형태", "근무지", "학력", "인원", "접수시작", "접수마감"):
+        if r.get("근무지"):
+            parts.append("<tr><td class='k'>근무지</td><td>"
+                         "<span class='zone z%d'>%s</span> %s</td></tr>"
+                         % (r.get("_zone", 3), esc(r.get("_zonelabel", "")),
+                            esc(r["근무지"])))
+        for k in ("고용형태", "경력", "학력", "인원", "접수시작", "접수마감"):
             if r.get(k):
                 parts.append("<tr><td class='k'>%s</td><td>%s</td></tr>" % (esc(k), esc(r[k])))
         if r.get("대체인력") == "예":
@@ -651,7 +857,7 @@ def _cards(parts, rows, today, new_ids):
 
 def _table(parts, rows, today, new_ids):
     parts.append("<table class='sum'><tr><th>#</th><th>기관</th><th>제목</th>"
-                 "<th>분야</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>")
+                 "<th>근무지</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>")
     for r in rows:
         n = dday(r.get("접수마감"), today)
         label = ("마감" if n is not None and n < 0 else
@@ -665,7 +871,9 @@ def _table(parts, rows, today, new_ids):
             % (cls, esc(r.get("접수마감", "")), r["_no"], r["_hid"], esc(r.get("기관명")),
                esc(r.get("제목"))[:60],
                "<span class='newtag'>NEW</span>" if r["_id"] in new_ids else "",
-               esc(" · ".join(r["_tags"])),
+               "<span class='zone z%d'>%s</span> %s" % (
+                   r.get("_zone", 3), esc(r.get("_zonelabel", "")),
+                   esc(r.get("근무지", ""))[:18]),
                "⭐" if r["_star"] else ("○" if r["_lic"] else ""),
                esc(r.get("고용형태")), esc(r.get("접수마감")), esc(label)))
     parts.append("</table>")
@@ -701,7 +909,7 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
 
     parts.append(
         "<div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>"
-        "이 표는 잡알리오·워크넷의 공고 요약을 자동으로 모아 정리한 것입니다. "
+        "이 표는 잡알리오·복지넷의 공고 요약을 자동으로 모아 정리한 것입니다. "
         "<b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 "
         "취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br>"
         "<b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, "
@@ -773,17 +981,28 @@ def main():
 
     raw = []
     raw += alio_fetch()
+    raw += bokji_fetch()
     raw += work_fetch()
     log("받아온 공고 %d건" % len(raw))
 
-    kept, dropped = [], {}
+    kept, dropped, 본것 = [], {}, {}
     for r in raw:
         normalize(r)
         ok, why = keep(r)
-        if ok:
-            kept.append(r)
-        else:
+        if not ok:
             dropped[why] = dropped.get(why, 0) + 1
+            continue
+        키 = dedupe_key(r)
+        앞 = 본것.get(키)
+        if 앞 is not None:
+            # 버리지 않고 **두 줄을 합친다**. 한쪽은 '서울특별시', 다른 쪽은
+            # '서울특별시 노원구'처럼 한쪽에만 있는 정보가 있기 때문이다.
+            merge_into(앞, r)
+            normalize(앞)
+            dropped["같은 공고 합침"] = dropped.get("같은 공고 합침", 0) + 1
+            continue
+        본것[키] = r
+        kept.append(r)
     log("걸러서 남은 공고 %d건 (버린 이유: %s)"
         % (len(kept), ", ".join("%s %d" % kv for kv in sorted(dropped.items())) or "없음"))
 
@@ -809,7 +1028,7 @@ def main():
                os.path.join(day_dir, "상담행정공고_%s.xlsx" % stamp), today, "공고")
     downloads = [("엑셀로 받기", "files/%s/상담행정공고_%s.xlsx" % (stamp, stamp))]
 
-    stats = "잡알리오·워크넷에서 %d건을 훑어 %d건" % (len(raw), len(kept))
+    stats = "잡알리오·복지넷에서 %d건을 훑어 %d건" % (len(raw), len(kept))
     write_page(os.path.join(DOCS_DIR, "index.html"), live, today, updated,
                new_ids, "open", downloads, stats)
 
