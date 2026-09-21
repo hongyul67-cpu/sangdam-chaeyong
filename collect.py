@@ -55,7 +55,7 @@ SITE_URL = "https://hongyul67-cpu.github.io/sangdam-chaeyong/"
 # 어느 지역을 볼지. 잡알리오 코드와 워크넷 코드가 서로 다르다.
 REGIONS_ALIO = "R3010,R3017"                # 서울 · 경기 (인천은 노원에서 출퇴근이 안 된다)
 REGIONS_WORK = "11000|41000|28000"          # 서울 · 경기 · 인천
-REGION_LABEL = "노원 기준 출퇴근권"
+REGION_LABEL = "서울 · 경기"
 # 잡알리오가 지역을 안 걸러 줄 때를 대비한 2차 그물(응답의 근무지 글자로 한 번 더 거른다)
 REGION_WORDS = ["서울", "경기", "인천", "전국"]
 
@@ -117,19 +117,25 @@ SKIP_WORDS = ["미화", "경비원", "청소원", "조리", "당직", "운전원
               "보안", "수위", "영양사", "간호", "의사", "약사", "사서보조",
               "관리인", "요양보호사", "생활지도원", "생활지원", "시설원예"]
 
-# ── 노원 기준 출퇴근 권역 ────────────────────────────────
-# 근무지 글자에서 시·군·구를 찾아 가까운 순으로 올려 준다. 버리지는 않는다 —
-# 조금 멀어도 조건이 좋은 자리가 있을 수 있어 판단은 사람이 한다.
-#   순서대로 검사한다. 어디에도 안 걸리면 **권역 밖이라 버린다** — 인천·충청 등.
-#   서울은 어느 구든 지하철로 다닐 만하니 통째로 2단계에 둔다.
+# ── 지역 ────────────────────────────────────────────────
+# 서울 전체와 경기 전체를 담는다. 어디를 볼지는 **화면에서 체크로** 고른다.
+# 처음 열면 아래 '노원 인근'만 켜져 있고, 단추 한 번으로 서울 전체·경기 전체를 켤 수 있다.
+NEAR_NOWON = ["노원", "도봉", "강북", "중랑", "성북", "동대문", "광진",
+              "의정부", "남양주", "구리", "양주", "동두천", "포천"]
+
 ZONES = [
-    (1, "가까움", ["노원", "도봉", "강북", "중랑", "성북", "동대문", "광진",
-                   "의정부", "남양주", "구리", "양주", "동두천", "포천"]),
-    (2, "서울권", ["서울"]),
-    (3, "먼 편", ["경기", "고양", "하남", "성남", "구리", "김포", "파주",
-                  "부천", "광명", "안양", "수원", "용인", "시흥", "군포"]),
+    (1, "가까움", NEAR_NOWON),      # 노원에서 다닐 만한 곳 — 목록에서 맨 위로
+    (2, "서울", ["서울"]),
+    (3, "경기", ["경기"]),
 ]
-ZONE_OUT = (9, "권역 밖")
+ZONE_OUT = (9, "그 밖")            # 서울도 경기도 아닌 곳 — 담지 않는다
+
+# 근무지 글자에서 시·군·구를 뽑는 규칙.
+#   복지넷은 '서울특별시 노원구' 처럼 또박또박 준다.
+#   잡알리오는 '서울,부산,대구,경기' 처럼 시도만, 그것도 여러 곳을 붙여 준다.
+SIDO_WORDS = [("서울", "서울"), ("경기", "경기")]
+SIGUNGU_RE = re.compile(r"([가-힣]{2,4}(?:구|시|군))")
+SIGUNGU_SKIP = {"특별시", "광역시", "자치시", "자치구", "특별자치시"}
 
 # ── 복지넷(한국사회복지협의회) ────────────────────────────
 # 시·군·구 청소년상담복지센터·꿈드림·건강가정지원센터 공고가 여기로 모인다.
@@ -589,9 +595,9 @@ def keep(row):
     if any(w in title for w in SKIP_WORDS):
         return False, "제외낱말"
 
-    # 출퇴근 권역. 근무지를 비워 보내는 공고가 있어, 비었으면 버리지 않고 통과시킨다.
+    # 서울·경기만 담는다. 근무지를 비워 보내는 공고가 있어, 비었으면 통과시킨다.
     if row.get("근무지", "").strip() and row.get("_zone", 9) == 9:
-        return False, "출퇴근 권역 밖"
+        return False, "서울·경기 밖"
 
     # ⭐ 공고에 '청소년상담사'가 실제로 적혀 있으면 무조건 담는다. 이 도구의 핵심이다.
     if row["_star"]:
@@ -610,12 +616,36 @@ def keep(row):
 
 
 def zone_of(row):
-    """노원에서 얼마나 가까운가. (순위, 이름표) — 시·군·구를 못 찾으면 '먼 편'."""
+    """노원에서 얼마나 가까운가. (순위, 이름표) — 목록을 정렬하는 데만 쓴다."""
     where = (row.get("근무지") or "") + " " + (row.get("기관명") or "")
     for rank, label, words in ZONES:
         if any(w in where for w in words):
             return rank, label
     return ZONE_OUT
+
+
+def regions_of(row):
+    """이 공고가 걸린 지역들. [('서울','노원구'), ('경기','')] 꼴.
+
+    한 공고가 여러 지역에 걸리기도 한다(잡알리오는 '서울,부산,경기' 처럼 준다).
+    시·군·구를 모르면 두 번째 칸이 빈 값이고, 화면에서는 '(구 미정)' 으로 묶인다.
+    """
+    where = (row.get("근무지") or "") + " " + (row.get("기관명") or "")
+    시군구 = [m for m in SIGUNGU_RE.findall(where) if m not in SIGUNGU_SKIP]
+    나온것 = []
+    for 낱말, 시도 in SIDO_WORDS:
+        if 낱말 not in where:
+            continue
+        # 이 시도에 속한 시·군·구만 붙인다. 서울은 '구', 경기는 '시·군'.
+        if 시도 == "서울":
+            내것 = [x for x in 시군구 if x.endswith("구")]
+        else:
+            내것 = [x for x in 시군구 if x.endswith(("시", "군"))]
+        if 내것:
+            나온것.extend((시도, x) for x in dict.fromkeys(내것))
+        else:
+            나온것.append((시도, ""))
+    return 나온것 or [("", "")]
 
 
 def normalize(row):
@@ -624,6 +654,7 @@ def normalize(row):
     row["_star"] = star
     row["_lic"] = found
     row["_zone"], row["_zonelabel"] = zone_of(row)
+    row["_regions"] = regions_of(row)
     return row
 
 
@@ -788,6 +819,25 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 .zone.z1{background:#dcfce7;color:#166534}
 .zone.z2{background:#e0e7ff;color:#3730a3}
 .zone.z3{background:#f3f4f6;color:#6b7280}
+.regionbox{border:1px solid #d1d5db;border-radius:10px;padding:11px 13px;margin:0 0 16px;
+ background:#fafafa}
+.rhead{font-size:13.5px;margin-bottom:8px}
+.rhint{color:#6b7280;font-size:12px;margin-left:8px}
+.rquick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+.rquick button{font-family:inherit;font-size:12.5px;padding:5px 11px;border:1px solid #111;
+ background:#111;color:#fff;border-radius:7px;cursor:pointer}
+.rquick button.off{background:#fff;color:#6b7280;border-color:#d1d5db}
+.rquick button:hover{opacity:.85}
+.rrow{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.rsido{font-size:12.5px;font-weight:700;color:#374151;min-width:2.4em;padding-top:4px}
+.rchips{display:flex;gap:5px;flex-wrap:wrap}
+.rchip{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;
+ border:1px solid #d1d5db;border-radius:99px;padding:3px 9px;background:#fff;cursor:pointer}
+.rchip.near{border-color:#86efac;background:#f0fdf4}
+.rchip input{margin:0;cursor:pointer}
+.rchip i{font-style:normal;color:#6b7280;font-size:11.5px}
+.rsum{font-size:12.5px;color:#374151;margin-top:8px}
+@media print{.regionbox{display:none !important}}
 .asof{margin:10px 0 0;font-size:12.5px;color:#374151;background:#fffbeb;
  border:1px solid #fde68a;border-radius:8px;padding:8px 10px}
 .hint{color:#666;font-size:12px;margin:6px 0 0}
@@ -876,6 +926,31 @@ function share(){
 
 
 
+def region_keys(row):
+    """이 공고를 화면에서 걸러 낼 열쇠들. '서울/노원구' 꼴, 구를 모르면 '서울/-'."""
+    return " ".join("%s/%s" % (시도, 시군구 or "-")
+                    for 시도, 시군구 in row.get("_regions", []) if 시도)
+
+
+def region_index(rows):
+    """화면에 내놓을 지역 목록. {시도: [(시군구, 건수), ...]} — 건수 많은 순."""
+    표 = {}
+    for r in rows:
+        for 시도, 시군구 in r.get("_regions", []):
+            if not 시도:
+                continue
+            표.setdefault(시도, {})
+            키 = 시군구 or "-"
+            표[시도][키] = 표[시도].get(키, 0) + 1
+    나온것 = {}
+    for 시도 in ("서울", "경기"):
+        if 시도 not in 표:
+            continue
+        항목 = sorted(표[시도].items(), key=lambda kv: (kv[0] == "-", -kv[1], kv[0]))
+        나온것[시도] = 항목
+    return 나온것
+
+
 def sort_key(r, today):
     """⭐ 먼저 → 가까운 곳 먼저 → 마감 임박순. 마감일이 없는 건 뒤로."""
     n = dday(r.get("접수마감"), today)
@@ -894,9 +969,10 @@ def _cards(parts, rows, today, new_ids):
                 "⭐ " if r["_star"] else "", esc(" · ".join(r["_lic"][:3])))
         newtag = "<span class='newtag'>NEW</span>" if r["_id"] in new_ids else ""
         parts.append(
-            "<div class='card%s' id='%s' data-dl='%s'><h2>%d. %s — %s%s</h2>"
+            "<div class='card%s' id='%s' data-dl='%s' data-rk='%s'><h2>%d. %s — %s%s</h2>"
             "<span class='src'>%s</span>%s %s<table>"
             % (" star" if r["_star"] else "", r["_hid"], esc(r.get("접수마감", "")),
+               esc(region_keys(r)),
                r["_no"], esc(r.get("기관명")), esc(r.get("제목")), newtag,
                esc(r.get("출처")), tags,
                "<span class='d'>%s</span>" % esc(label) if label else ""))
@@ -930,10 +1006,11 @@ def _table(parts, rows, today, new_ids):
         urgent = n is not None and 0 <= n <= 7
         cls = " class='urgent'" if urgent else (" class='star'" if r["_star"] else "")
         parts.append(
-            "<tr%s data-dl='%s'><td>%d</td><td><a href='#%s'>%s</a></td>"
+            "<tr%s data-dl='%s' data-rk='%s'><td>%d</td><td><a href='#%s'>%s</a></td>"
             "<td>%s%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>"
             "<td class='st'>%s</td></tr>"
-            % (cls, esc(r.get("접수마감", "")), r["_no"], r["_hid"], esc(r.get("기관명")),
+            % (cls, esc(r.get("접수마감", "")), esc(region_keys(r)),
+               r["_no"], r["_hid"], esc(r.get("기관명")),
                esc(r.get("제목"))[:60],
                "<span class='newtag'>NEW</span>" if r["_id"] in new_ids else "",
                "<span class='zone z%d'>%s</span> %s" % (
@@ -942,6 +1019,123 @@ def _table(parts, rows, today, new_ids):
                "⭐" if r["_star"] else ("○" if r["_lic"] else ""),
                esc(r.get("고용형태")), esc(r.get("접수마감")), esc(label)))
     parts.append("</table>")
+
+
+# 지역 체크에 따라 줄과 카드를 감춘다. 고른 것은 이 브라우저에만 기억해 둔다
+# (다른 기기·다른 사람에게는 영향이 없다. 기억이 안 되는 환경도 있어 감싸 둔다).
+REGION_JS = """<script>
+var NEAR = %s;
+function boxes(){ return [].slice.call(document.querySelectorAll('.regionbox input[type=checkbox]')); }
+function pick(what){
+  boxes().forEach(function(b){
+    if (what === 'all')       b.checked = true;
+    else if (what === 'none') b.checked = false;
+    else if (what === 'near') b.checked = (NEAR.indexOf(b.value) >= 0);
+    else                      b.checked = (b.value.indexOf(what + '/') === 0);
+  });
+  applyRegions(true);
+}
+function applyRegions(save){
+  var 켠것 = boxes().filter(function(b){ return b.checked; })
+                    .map(function(b){ return b.value; });
+  var 다끔 = (켠것.length === 0);
+  function 보일까(el){
+    if (다끔) return false;
+    var rk = (el.getAttribute('data-rk') || '').split(' ');
+    for (var i = 0; i < rk.length; i++) if (켠것.indexOf(rk[i]) >= 0) return true;
+    return false;
+  }
+  var 보인수 = 0;
+  document.querySelectorAll('.card[data-rk]').forEach(function(c){
+    var ok = 보일까(c); c.style.display = ok ? '' : 'none'; if (ok) 보인수++;
+  });
+  document.querySelectorAll('tr[data-rk]').forEach(function(tr){
+    tr.style.display = 보일까(tr) ? '' : 'none';
+  });
+  // 표가 통째로 비면 그 표와 제목까지 감춘다
+  document.querySelectorAll('table.sum').forEach(function(t){
+    var 남은 = [].slice.call(t.querySelectorAll('tr[data-rk]'))
+                 .filter(function(r){ return r.style.display !== 'none'; }).length;
+    t.style.display = 남은 ? '' : 'none';
+    var h = t.previousElementSibling;
+    while (h && h.tagName !== 'H3') h = h.previousElementSibling;
+    if (h) h.style.display = 남은 ? '' : 'none';
+  });
+  // 제목의 건수도 같이 고친다. '전체 13건' 이라고 둔 채 2건만 보이면 헷갈린다.
+  var h = document.getElementById('sumhead');
+  if (h) {
+    var 전체 = h.getAttribute('data-total');
+    h.textContent = (보인수 == 전체)
+      ? ('한눈에 보기 — 전체 ' + 전체 + '건')
+      : ('한눈에 보기 — 고른 지역 ' + 보인수 + '건 (서울·경기 전체는 ' + 전체 + '건)');
+  }
+  var s = document.getElementById('rsum');
+  if (s) s.innerHTML = 다끔
+      ? '<b>지역을 하나도 고르지 않아 아무것도 보이지 않습니다.</b> 위에서 켜 주세요.'
+      : ('고른 지역의 공고 <b>' + 보인수 + '건</b>을 보고 있습니다.');
+  if (save) { try { localStorage.setItem('지역선택', JSON.stringify(켠것)); } catch(e){} }
+}
+function 처음시작(){
+  try {
+    var 저장 = JSON.parse(localStorage.getItem('지역선택') || 'null');
+    if (저장 && 저장.length !== undefined) {
+      boxes().forEach(function(b){ b.checked = (저장.indexOf(b.value) >= 0); });
+    }
+  } catch(e){}
+  applyRegions(false);
+}
+// 이 스크립트는 문서 중간(지역 상자 바로 뒤)에 있다. 그대로 실행하면 아래쪽
+// 카드·표가 아직 만들어지지 않아 0건으로 세고 아무것도 안 감춘다. 다 만들어진 뒤에 돈다.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', 처음시작);
+} else {
+  처음시작();
+}
+</script>"""
+
+
+def region_panel(rows):
+    """지역 체크 상자. 처음에는 '노원 인근'만 켜져 있다."""
+    표 = region_index(rows)
+    if not 표:
+        return ""
+    def 가까운가(시도, 시군구):
+        return any(w in (시군구 or 시도) for w in NEAR_NOWON)
+
+    처음켠것 = [("%s/%s" % (시도, 시군구))
+                for 시도, 항목 in 표.items()
+                for 시군구, _ in 항목 if 가까운가(시도, 시군구)]
+    # 노원 인근에 걸리는 게 하나도 없으면 빈 화면이 되니, 그때는 전부 켠다.
+    전부 = ["%s/%s" % (시도, 시군구) for 시도, 항목 in 표.items() for 시군구, _ in 항목]
+    처음켠것 = 처음켠것 or 전부
+
+    p = ["<div class='regionbox noprint'>"]
+    p.append("<div class='rhead'><b>📍 지역 고르기</b>"
+             "<span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div>")
+    p.append("<div class='rquick'>"
+             "<button type='button' onclick=\"pick('near')\">노원 인근</button>"
+             "<button type='button' onclick=\"pick('서울')\">서울 전체</button>"
+             "<button type='button' onclick=\"pick('경기')\">경기 전체</button>"
+             "<button type='button' onclick=\"pick('all')\">모두</button>"
+             "<button type='button' class='off' onclick=\"pick('none')\">모두 끄기</button>"
+             "</div>")
+    for 시도, 항목 in 표.items():
+        p.append("<div class='rrow'><span class='rsido'>%s</span><div class='rchips'>" % esc(시도))
+        for 시군구, 개수 in 항목:
+            키 = "%s/%s" % (시도, 시군구)
+            이름 = "(구 미정)" if (시군구 == "-" and 시도 == "서울") else (
+                   "(시 미정)" if 시군구 == "-" else 시군구)
+            켬 = " checked" if 키 in 처음켠것 else ""
+            가깝 = " near" if 가까운가(시도, 시군구) else ""
+            p.append("<label class='rchip%s'><input type='checkbox' value='%s'%s "
+                     "onchange='applyRegions(true)'>%s <i>%d</i></label>"
+                     % (가깝, esc(키), 켬, esc(이름), 개수))
+        p.append("</div></div>")
+    p.append("<div class='rsum' id='rsum'></div>")
+    p.append("</div>")
+    p.append(REGION_JS % json.dumps(sorted(set(
+        k for k in 전부 if 가까운가(*k.split("/", 1))))))
+    return "".join(p)
 
 
 def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=None):
@@ -993,6 +1187,8 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
     bar.append("</div>")
     parts.append("".join(bar))
 
+    parts.append(region_panel(rows))
+
     if not rows:
         parts.append("<div class='none'>해당하는 공고가 없습니다.</div>")
         save_text(path, "\n".join(parts))
@@ -1004,7 +1200,8 @@ def write_page(path, rows, today, updated, new_ids, mode, downloads=None, stats=
         parts.append("<p class='hint'>공고 글자에 ‘청소년상담사’가 들어 있는 것만 따로 모았습니다. "
                      "아래 ‘한눈에 보기’에 다시 나옵니다.</p>")
 
-    parts.append("<h3>한눈에 보기 — 전체 %d건</h3>" % len(rows))
+    parts.append("<h3 id='sumhead' data-total='%d'>한눈에 보기 — 전체 %d건</h3>"
+                 % (len(rows), len(rows)))
     parts.append("<p class='hint'>줄을 누르면 아래 상세 내용으로 바로 갑니다.</p>")
     _table(parts, rows, today, new_ids)
 
