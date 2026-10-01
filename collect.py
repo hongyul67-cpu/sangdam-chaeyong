@@ -4,7 +4,7 @@
 
 하는 일
   1. 잡알리오 오픈API(공공기관)와 워크넷 오픈API(민간·지자체 포함)에서
-     수도권(서울·경기·인천) 공고를 가져온다
+     서울·경기·대전 공고를 가져온다
   2. 상담 / 청소년·복지 / 교육기관 행정직만 남긴다
   3. '청소년상담사' 자격이 요건·우대에 적힌 공고에 ⭐ 를 붙인다
   4. 한 장짜리 웹페이지(docs/index.html)와 엑셀을 만든다
@@ -53,11 +53,11 @@ HIST_PATH = os.path.join(DATA_DIR, "history.json")
 SITE_URL = "https://hongyul67-cpu.github.io/sangdam-chaeyong/"
 
 # 어느 지역을 볼지. 잡알리오 코드와 워크넷 코드가 서로 다르다.
-REGIONS_ALIO = "R3010,R3017"                # 서울 · 경기 (인천은 노원에서 출퇴근이 안 된다)
+REGIONS_ALIO = "R3010,R3017,R3012"          # 서울 · 경기 · 대전 (인천은 노원에서 출퇴근이 안 된다)
 REGIONS_WORK = "11000|41000|28000"          # 서울 · 경기 · 인천
-REGION_LABEL = "서울 · 경기"
+REGION_LABEL = "서울 · 경기 · 대전"
 # 잡알리오가 지역을 안 걸러 줄 때를 대비한 2차 그물(응답의 근무지 글자로 한 번 더 거른다)
-REGION_WORDS = ["서울", "경기", "인천", "전국"]
+REGION_WORDS = ["서울", "경기", "대전", "인천", "전국"]
 
 # 잡알리오 NCS 대분류.
 #   사회복지.종교  → 상담·복지 자리가 대부분 여기 들어온다
@@ -118,7 +118,8 @@ SKIP_WORDS = ["미화", "경비원", "청소원", "조리", "당직", "운전원
               "관리인", "요양보호사", "생활지도원", "생활지원", "시설원예"]
 
 # ── 지역 ────────────────────────────────────────────────
-# 서울 전체와 경기 전체를 담는다. 어디를 볼지는 **화면에서 체크로** 고른다.
+# 서울 전체와 경기 전체, 그리고 대전(2026-10-01 추가)을 담는다.
+# 어디를 볼지는 **화면에서 체크로** 고른다.
 # 처음 열면 아래 '노원 인근'만 켜져 있고, 단추 한 번으로 서울 전체·경기 전체를 켤 수 있다.
 NEAR_NOWON = ["노원", "도봉", "강북", "중랑", "성북", "동대문", "광진",
               "의정부", "남양주", "구리", "양주", "동두천", "포천"]
@@ -127,15 +128,20 @@ ZONES = [
     (1, "가까움", NEAR_NOWON),      # 노원에서 다닐 만한 곳 — 목록에서 맨 위로
     (2, "서울", ["서울"]),
     (3, "경기", ["경기"]),
+    (4, "대전", ["대전"]),
 ]
-ZONE_OUT = (9, "그 밖")            # 서울도 경기도 아닌 곳 — 담지 않는다
+ZONE_OUT = (9, "그 밖")            # 서울·경기·대전이 아닌 곳 — 담지 않는다
 
 # 근무지 글자에서 시·군·구를 뽑는 규칙.
 #   복지넷은 '서울특별시 노원구' 처럼 또박또박 준다.
 #   잡알리오는 '서울,부산,대구,경기' 처럼 시도만, 그것도 여러 곳을 붙여 준다.
-SIDO_WORDS = [("서울", "서울"), ("경기", "경기")]
+SIDO_WORDS = [("서울", "서울"), ("경기", "경기"), ("대전", "대전")]
+# 화면에 내놓는 순서
+SIDO_ORDER = ("서울", "경기", "대전")
 SIGUNGU_RE = re.compile(r"([가-힣]{2,4}(?:구|시|군))")
 SIGUNGU_SKIP = {"특별시", "광역시", "자치시", "자치구", "특별자치시"}
+# 대전은 구 이름이 한 글자짜리(동구·중구·서구)가 많아 위 규칙에 안 걸린다. 따로 찾는다.
+DAEJEON_GU_RE = re.compile(r"대전(?:광역시)?\s*(유성구|대덕구|동구|중구|서구)")
 
 # ── 복지넷(한국사회복지협의회) ────────────────────────────
 # 시·군·구 청소년상담복지센터·꿈드림·건강가정지원센터 공고가 여기로 모인다.
@@ -147,7 +153,7 @@ SIGUNGU_SKIP = {"특별시", "광역시", "자치시", "자치구", "특별자�
 #   · 요청 사이를 1초 쉬고, 주 2회만 돈다.
 BOKJI_LIST = "https://www.bokji.net/job/off/01.bokji"
 BOKJI_VIEW = "https://www.bokji.net/job/off/01_01.bokji?ID=%s"
-BOKJI_REGIONS = [("11000", "서울"), ("41000", "경기")]
+BOKJI_REGIONS = [("11000", "서울"), ("41000", "경기"), ("30000", "대전")]
 BOKJI_KEYWORDS = ["상담", "청소년", "꿈드림", "심리", "학교밖", "동반자"]
 BOKJI_MAX_PAGES = 3
 
@@ -270,7 +276,7 @@ def alio_get(path, params):
 
 
 def alio_fetch():
-    """잡알리오에서 수도권 상담·복지·교육·사무 공고를 모아 온다."""
+    """잡알리오에서 서울·경기·대전 상담·복지·교육·사무 공고를 모아 온다."""
     if not _alio_key():
         log("잡알리오 인증키(ALIO_API_KEY) 없음 — 건너뜁니다")
         return []
@@ -421,7 +427,7 @@ def bokji_parse(page):
 
 
 def bokji_fetch():
-    """복지넷에서 수도권 상담·청소년 공고를 모아 온다."""
+    """복지넷에서 서울·경기·대전 상담·청소년 공고를 모아 온다."""
     today = dt.date.today()
     base = [("ID", ""), ("UP_REGION_CODE", ""), ("REGION_CODE2", ""),
             ("WORK_TYPE", ""), ("CAREERDIV", ""),
@@ -595,9 +601,9 @@ def keep(row):
     if any(w in title for w in SKIP_WORDS):
         return False, "제외낱말"
 
-    # 서울·경기만 담는다. 근무지를 비워 보내는 공고가 있어, 비었으면 통과시킨다.
+    # 서울·경기·대전만 담는다. 근무지를 비워 보내는 공고가 있어, 비었으면 통과시킨다.
     if row.get("근무지", "").strip() and row.get("_zone", 9) == 9:
-        return False, "서울·경기 밖"
+        return False, "서울·경기·대전 밖"
 
     # ⭐ 공고에 '청소년상담사'가 실제로 적혀 있으면 무조건 담는다. 이 도구의 핵심이다.
     if row["_star"]:
@@ -631,7 +637,8 @@ def regions_of(row):
     시·군·구를 모르면 두 번째 칸이 빈 값이고, 화면에서는 '(구 미정)' 으로 묶인다.
     """
     where = (row.get("근무지") or "") + " " + (row.get("기관명") or "")
-    시군구 = [m for m in SIGUNGU_RE.findall(where) if m not in SIGUNGU_SKIP]
+    시군구 = [m for m in SIGUNGU_RE.findall(where)
+              if m not in SIGUNGU_SKIP and not m.endswith(("특별시", "광역시"))]
     나온것 = []
     for 낱말, 시도 in SIDO_WORDS:
         if 낱말 not in where:
@@ -639,6 +646,8 @@ def regions_of(row):
         # 이 시도에 속한 시·군·구만 붙인다. 서울은 '구', 경기는 '시·군'.
         if 시도 == "서울":
             내것 = [x for x in 시군구 if x.endswith("구")]
+        elif 시도 == "대전":
+            내것 = DAEJEON_GU_RE.findall(where)
         else:
             내것 = [x for x in 시군구 if x.endswith(("시", "군"))]
         if 내것:
@@ -819,6 +828,7 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 .zone.z1{background:#dcfce7;color:#166534}
 .zone.z2{background:#e0e7ff;color:#3730a3}
 .zone.z3{background:#f3f4f6;color:#6b7280}
+.zone.z4{background:#ffedd5;color:#9a3412}
 .regionbox{border:1px solid #d1d5db;border-radius:10px;padding:11px 13px;margin:0 0 16px;
  background:#fafafa}
 .rhead{font-size:13.5px;margin-bottom:8px}
@@ -943,7 +953,7 @@ def region_index(rows):
             키 = 시군구 or "-"
             표[시도][키] = 표[시도].get(키, 0) + 1
     나온것 = {}
-    for 시도 in ("서울", "경기"):
+    for 시도 in SIDO_ORDER:
         if 시도 not in 표:
             continue
         항목 = sorted(표[시도].items(), key=lambda kv: (kv[0] == "-", -kv[1], kv[0]))
@@ -1067,7 +1077,7 @@ function applyRegions(save){
     var 전체 = h.getAttribute('data-total');
     h.textContent = (보인수 == 전체)
       ? ('한눈에 보기 — 전체 ' + 전체 + '건')
-      : ('한눈에 보기 — 고른 지역 ' + 보인수 + '건 (서울·경기 전체는 ' + 전체 + '건)');
+      : ('한눈에 보기 — 고른 지역 ' + 보인수 + '건 (서울·경기·대전 전체는 ' + 전체 + '건)');
   }
   var s = document.getElementById('rsum');
   if (s) s.innerHTML = 다끔
@@ -1116,6 +1126,7 @@ def region_panel(rows):
              "<button type='button' onclick=\"pick('near')\">노원 인근</button>"
              "<button type='button' onclick=\"pick('서울')\">서울 전체</button>"
              "<button type='button' onclick=\"pick('경기')\">경기 전체</button>"
+             "<button type='button' onclick=\"pick('대전')\">대전 전체</button>"
              "<button type='button' onclick=\"pick('all')\">모두</button>"
              "<button type='button' class='off' onclick=\"pick('none')\">모두 끄기</button>"
              "</div>")
@@ -1123,7 +1134,7 @@ def region_panel(rows):
         p.append("<div class='rrow'><span class='rsido'>%s</span><div class='rchips'>" % esc(시도))
         for 시군구, 개수 in 항목:
             키 = "%s/%s" % (시도, 시군구)
-            이름 = "(구 미정)" if (시군구 == "-" and 시도 == "서울") else (
+            이름 = "(구 미정)" if (시군구 == "-" and 시도 in ("서울", "대전")) else (
                    "(시 미정)" if 시군구 == "-" else 시군구)
             켬 = " checked" if 키 in 처음켠것 else ""
             가깝 = " near" if 가까운가(시도, 시군구) else ""
