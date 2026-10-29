@@ -54,6 +54,19 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 .zone.z2{background:#e0e7ff;color:#3730a3}
 .zone.z3{background:#f3f4f6;color:#6b7280}
 .zone.z4{background:#ffedd5;color:#9a3412}
+.hk{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11.5px;font-weight:700;
+ margin:1px 4px 1px 0;white-space:nowrap;border:1px solid transparent}
+.hk-reg{background:#166534;color:#fff}
+.hk-muki{background:#1d4ed8;color:#fff}
+.hk-intern{background:#ccfbf1;color:#115e59;border-color:#5eead4}
+.hk-exp{background:#f3e8ff;color:#6b21a8;border-color:#d8b4fe}
+.hk-temp{background:#f3f4f6;color:#374151;border-color:#9ca3af}
+.hk-part{background:#fff;color:#374151;border-color:#9ca3af}
+.hk-sub{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.hk-etc{background:#fff;color:#374151;border-color:#d1d5db}
+.hkm{display:none;margin-top:3px}
+.card td{overflow-wrap:anywhere}
+.hklegend{font-size:12.5px;color:#374151;margin:0 0 14px;line-height:1.9}
 .regionbox{border:1px solid #d1d5db;border-radius:10px;padding:11px 13px;margin:0 0 16px;
  background:#fafafa}
 .rhead{font-size:13.5px;margin-bottom:8px}
@@ -86,6 +99,7 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  table.sum th:nth-child(6),table.sum td:nth-child(6){display:none}
  table.sum td:nth-child(2){min-width:5.2em}
  table.sum th:nth-child(7),table.sum td:nth-child(7){white-space:nowrap;font-size:11.5px}
+ .hkm{display:block}
  .card h2{font-size:14.5px}
  td.k{width:4.6em}}
 @media print{body{margin:0;font-size:11pt}.bar,.noprint,.tabs{display:none!important}
@@ -94,12 +108,12 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  .warn{border:2px solid #000;background:#fff;color:#000}
  h3{break-after:avoid}a{color:#000;text-decoration:none}}</style>
 <h1>새로 올라온 공고 (2026-10-29)</h1>
-<div class='sub'>이번에 <b>새로 확인된 공고 1건</b>입니다. (⭐ 청소년상담사 관련 0건)</div>
-<div class='stamp'>🕒 마지막 갱신 2026-10-29 11:54 (한국시간)</div>
+<div class='sub'>이번에 <b>새로 확인된 공고 7건</b>입니다. (⭐ 청소년상담사 관련 0건)</div>
+<div class='stamp'>🕒 마지막 갱신 2026-10-29 14:00 (한국시간)</div>
 <div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>이 표는 잡알리오·복지넷의 공고 요약을 자동으로 모아 정리한 것입니다. <b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br><b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, 필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>
 <div class='bar'><button onclick='share()'>🔗 이 화면 링크 보내기</button><button class='ghost' onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/2026-10-29/상담행정공고_2026-10-29.xlsx' download>⬇ 이번 회차 엑셀</a><a class='btnlink' href='archive.html'>📁 지난 회차 보기</a><a class='btnlink' href='index.html'>🏠 지금 지원 가능한 공고</a></div>
-<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>서울</span><div class='rchips'><label class='rchip'><input type='checkbox' value='서울/-' checked onchange='applyRegions(true)'>(구 미정) <i>1</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
-var NEAR = [];
+<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>서울</span><div class='rchips'><label class='rchip near'><input type='checkbox' value='서울/노원구' checked onchange='applyRegions(true)'>노원구 <i>1</i></label></div></div><div class='rrow'><span class='rsido'>경기</span><div class='rchips'><label class='rchip'><input type='checkbox' value='경기/김포시' onchange='applyRegions(true)'>김포시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/수원시' onchange='applyRegions(true)'>수원시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/-' onchange='applyRegions(true)'>(시 미정) <i>1</i></label></div></div><div class='rrow'><span class='rsido'>대전</span><div class='rchips'><label class='rchip'><input type='checkbox' value='대전/서구' onchange='applyRegions(true)'>서구 <i>1</i></label><label class='rchip'><input type='checkbox' value='대전/-' onchange='applyRegions(true)'>(구 미정) <i>2</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
+var NEAR = ["\uc11c\uc6b8/\ub178\uc6d0\uad6c"];
 function boxes(){ return [].slice.call(document.querySelectorAll('.regionbox input[type=checkbox]')); }
 function pick(what){
   boxes().forEach(function(b){
@@ -167,23 +181,80 @@ if (document.readyState === 'loading') {
   처음시작();
 }
 </script>
-<h3 id='sumhead' data-total='1'>한눈에 보기 — 전체 1건</h3>
+<div class='hklegend'><b>고용형태</b> &nbsp;<span class='hk hk-reg'>정규직</span><span class='hk hk-muki'>무기직</span>정년까지 일하는 무기계약·공무직 &nbsp;<span class='hk hk-temp'>계약직</span>기간제 등 기간이 정해진 자리 &nbsp;<span class='hk hk-sub'>대체인력</span>육아휴직 등 빈자리를 그 기간만 채움 &nbsp;<span class='hk hk-exp'>체험형 인턴</span><span class='hk hk-intern'>채용형 인턴</span><br>이름표가 여러 개면 한 공고에서 여러 형태를 같이 뽑는 것입니다. 어느 자리가 어떤 형태인지는 원문 공고에서 확인하세요.</div>
+<h3 id='sumhead' data-total='7'>한눈에 보기 — 전체 7건</h3>
 <p class='hint'>줄을 누르면 아래 상세 내용으로 바로 갑니다.</p>
 <table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>근무지</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
-<tr data-dl='2026-11-11' data-rk='서울/-'><td>1</td><td><a href='#c1'>한국기술교육대학교</a></td><td>한국기술교육대학교 직업능력심사평가원 기간제 근로자(휴직 및 퇴사 대체인력) 채용(6차) 공고<span class='newtag'>NEW</span></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td>비정규직</td><td>2026-11-11</td><td class='st'>D-13</td></tr>
+<tr class='urgent' data-dl='2026-10-31' data-rk='서울/노원구'><td>1</td><td><a href='#c1'>성모자애드림힐</a></td><td>성모자애드림힐 임상심리사 채용 재공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z1'>가까움</span> 서울특별시 노원구</td><td>○</td><td><span class='hk hk-reg'>정규직</span></td><td>2026-10-31</td><td class='st'>D-2</td></tr>
+<tr data-dl='2026-11-11' data-rk='경기/-'><td>2</td><td><a href='#c2'>빛솔</a></td><td>오산시 학대피해아동쉼터(남아) 임상심리상담원(육아휴직 대체) 채용공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z3'>경기</span> 경기도</td><td></td><td><span class='hk hk-sub'>대체인력</span></td><td>2026-11-11</td><td class='st'>D-13</td></tr>
+<tr data-dl='2026-11-11' data-rk='경기/수원시'><td>3</td><td><a href='#c3'>수원시청소년성문화센터</a></td><td>수원시청소년성문화센터 직원(팀원) 채용 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z3'>경기</span> 경기도 수원시</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-11</td><td class='st'>D-13</td></tr>
+<tr data-dl='2026-11-12' data-rk='경기/김포시'><td>4</td><td><a href='#c4'>김포시장애아동재활센터</a></td><td>2026년도 제5회 재활서비스 위탁 강사 채용 공고(놀이심리재활사)<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-part'>시간제</span></div></td><td><span class='zone z3'>경기</span> 경기도 김포시</td><td></td><td><span class='hk hk-part'>시간제</span></td><td>2026-11-12</td><td class='st'>D-14</td></tr>
+<tr data-dl='2026-11-11' data-rk='대전/-'><td>5</td><td><a href='#c5'>대전YWCA가족쉼터</a></td><td>대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-11</td><td class='st'>D-13</td></tr>
+<tr data-dl='2026-11-12' data-rk='대전/-'><td>6</td><td><a href='#c6'>대전서부아동보호전문기관</a></td><td>대전서부아동보호전문기관 상담원 채용<span class='newtag'>NEW</span><div class='hkm'></div></td><td><span class='zone z4'>대전</span> 대전광역시</td><td></td><td></td><td>2026-11-12</td><td class='st'>D-14</td></tr>
+<tr data-dl='2026-11-12' data-rk='대전/서구'><td>7</td><td><a href='#c7'>세이브더칠드런 대전서부아동보호전문기관</a></td><td>대전서부아동보호전문기관 상담원 및 홈케어플래너서포터즈지원사업 지역관리자 모집<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시 서구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-12</td><td class='st'>D-14</td></tr>
 </table>
 <h3>상세</h3>
-<div class='card' id='c1' data-dl='2026-11-11' data-rk='서울/-'><h2>1. 한국기술교육대학교 — 한국기술교육대학교 직업능력심사평가원 기간제 근로자(휴직 및 퇴사 대체인력) 채용(6차) 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>행정</span><span class='tag'>교육</span> <span class='d'>D-13</span><table>
-<tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울</td></tr>
-<tr><td class='k'>고용형태</td><td>비정규직</td></tr>
-<tr><td class='k'>학력</td><td>학력무관</td></tr>
-<tr><td class='k'>인원</td><td>7</td></tr>
-<tr><td class='k'>접수시작</td><td>2026-10-28</td></tr>
+<div class='card' id='c1' data-dl='2026-10-31' data-rk='서울/노원구'><h2>1. 성모자애드림힐 — 성모자애드림힐 임상심리사 채용 재공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>상담</span><span class='tag lic'>임상심리사</span> <span class='d'>D-2</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z1'>가까움</span> 서울특별시 노원구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-16</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-10-31</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1068243' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1068243</a></td></tr>
+</table></div>
+<div class='card' id='c2' data-dl='2026-11-11' data-rk='경기/-'><h2>2. 빛솔 — 오산시 학대피해아동쉼터(남아) 임상심리상담원(육아휴직 대체) 채용공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-13</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-27</td></tr>
 <tr><td class='k'>접수마감</td><td>2026-11-11</td></tr>
 <tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
-<tr><td class='k'>자격요건</td><td>ㅇ 국가공무원법 제33조의 결격사유가 없는 자 ㅇ 임용일 기준 한국기술교육대학교 「직원인사규정」제14조의 결격사유에 해당하지 않으며, 동 규정 제37조에 의한 정년연령(60세) 미만인 지원자 ㅇ 모집구분별 계약일로부터 현업 근무 가능자 ㅇ 채용분야 전산은 관련 자격증* 보유 필요 * 컴퓨터시스템응용기술사, 정보통신기술사, 정보관리기술사, 전자계산기기사, 정보통신기사, 정보처리기사, 정보보안기사 1개 이상 보유</td></tr>
-<tr><td class='k'>우대</td><td>취업지원대상자 관련법에 의거하여 가산점 반영 취업지원대상자 관련법에 의거하여 가산점 반영</td></tr>
-<tr><td class='k'>지원</td><td><a href='https://www.koreatech.ac.kr/notice/view.es?mid=a10604040000&amp;board_id=150&amp;post_seq=859&amp;prefix_id=' target='_blank' rel='noopener'>https://www.koreatech.ac.kr/notice/view.es?mid=a10604040000&amp;board_id=150&amp;post_seq=859&amp;prefix_id=</a></td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075601' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075601</a></td></tr>
+</table></div>
+<div class='card' id='c3' data-dl='2026-11-11' data-rk='경기/수원시'><h2>3. 수원시청소년성문화센터 — 수원시청소년성문화센터 직원(팀원) 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span> <span class='d'>D-13</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 수원시</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-28</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-11</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075791' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075791</a></td></tr>
+</table></div>
+<div class='card' id='c4' data-dl='2026-11-12' data-rk='경기/김포시'><h2>4. 김포시장애아동재활센터 — 2026년도 제5회 재활서비스 위탁 강사 채용 공고(놀이심리재활사)<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-part'>시간제</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>교육</span> <span class='d'>D-14</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 김포시</td></tr>
+<tr><td class='k'>고용형태</td><td>파트타임</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-29</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-12</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075793' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075793</a></td></tr>
+</table></div>
+<div class='card' id='c5' data-dl='2026-11-11' data-rk='대전/-'><h2>5. 대전YWCA가족쉼터 — 대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span><span class='tag'>복지</span> <span class='d'>D-13</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>신입</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-28</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-11</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075887' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075887</a></td></tr>
+</table></div>
+<div class='card' id='c6' data-dl='2026-11-12' data-rk='대전/-'><h2>6. 대전서부아동보호전문기관 — 대전서부아동보호전문기관 상담원 채용<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-14</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>3</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-28</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-12</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075721' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075721</a></td></tr>
+</table></div>
+<div class='card' id='c7' data-dl='2026-11-12' data-rk='대전/서구'><h2>7. 세이브더칠드런 대전서부아동보호전문기관 — 대전서부아동보호전문기관 상담원 및 홈케어플래너서포터즈지원사업 지역관리자 모집<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-14</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시 서구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>4</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-10-28</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-12</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075726' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075726</a></td></tr>
 </table></div>
 <script>
 function share(){
