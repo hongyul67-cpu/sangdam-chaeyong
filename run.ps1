@@ -19,6 +19,14 @@ param([switch]$Auto)          # -Auto : 작업 스케줄러가 부를 때(끝나
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $here
+
+# ※ 깃은 저장(commit)할 때 가끔 스스로 '창고 정리'를 한다. 그때 다른 프로그램(백신 등)이
+#   폴더를 붙잡고 있으면 "Should I try again? (y/n)" 하고 사람 대답을 기다리며 멈춘다
+#   (2026-10-29 실제로 멈춰 올리기를 못 했다). 대답해 줄 사람이 없으니 늘 '아니오'로 넘어가게 한다.
+#   못 지운 빈 폴더는 남아도 해가 없고, 다음 정리 때 다시 지운다.
+$env:GIT_ASK_YESNO = "false"
+$env:GIT_TERMINAL_PROMPT = "0"   # 깃허브 로그인 질문으로도 멈추지 않게(로그인이 풀리면 그냥 실패로 끝남)
+
 $기록파일 = Join-Path $here "data\작업기록.txt"
 
 function 남기기($t) {
