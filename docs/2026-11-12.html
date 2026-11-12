@@ -54,6 +54,19 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 .zone.z2{background:#e0e7ff;color:#3730a3}
 .zone.z3{background:#f3f4f6;color:#6b7280}
 .zone.z4{background:#ffedd5;color:#9a3412}
+.hk{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11.5px;font-weight:700;
+ margin:1px 4px 1px 0;white-space:nowrap;border:1px solid transparent}
+.hk-reg{background:#166534;color:#fff}
+.hk-muki{background:#1d4ed8;color:#fff}
+.hk-intern{background:#ccfbf1;color:#115e59;border-color:#5eead4}
+.hk-exp{background:#f3e8ff;color:#6b21a8;border-color:#d8b4fe}
+.hk-temp{background:#f3f4f6;color:#374151;border-color:#9ca3af}
+.hk-part{background:#fff;color:#374151;border-color:#9ca3af}
+.hk-sub{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.hk-etc{background:#fff;color:#374151;border-color:#d1d5db}
+.hkm{display:none;margin-top:3px}
+.card td{overflow-wrap:anywhere}
+.hklegend{font-size:12.5px;color:#374151;margin:0 0 14px;line-height:1.9}
 .regionbox{border:1px solid #d1d5db;border-radius:10px;padding:11px 13px;margin:0 0 16px;
  background:#fafafa}
 .rhead{font-size:13.5px;margin-bottom:8px}
@@ -86,6 +99,7 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  table.sum th:nth-child(6),table.sum td:nth-child(6){display:none}
  table.sum td:nth-child(2){min-width:5.2em}
  table.sum th:nth-child(7),table.sum td:nth-child(7){white-space:nowrap;font-size:11.5px}
+ .hkm{display:block}
  .card h2{font-size:14.5px}
  td.k{width:4.6em}}
 @media print{body{margin:0;font-size:11pt}.bar,.noprint,.tabs{display:none!important}
@@ -94,12 +108,12 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  .warn{border:2px solid #000;background:#fff;color:#000}
  h3{break-after:avoid}a{color:#000;text-decoration:none}}</style>
 <h1>새로 올라온 공고 (2026-11-12)</h1>
-<div class='sub'>이번에 <b>새로 확인된 공고 1건</b>입니다. (⭐ 청소년상담사 관련 0건)</div>
-<div class='stamp'>🕒 마지막 갱신 2026-11-12 13:17 (한국시간)</div>
+<div class='sub'>이번에 <b>새로 확인된 공고 4건</b>입니다. (⭐ 청소년상담사 관련 0건)</div>
+<div class='stamp'>🕒 마지막 갱신 2026-11-12 14:00 (한국시간)</div>
 <div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>이 표는 잡알리오·복지넷의 공고 요약을 자동으로 모아 정리한 것입니다. <b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br><b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, 필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>
 <div class='bar'><button onclick='share()'>🔗 이 화면 링크 보내기</button><button class='ghost' onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/2026-11-12/상담행정공고_2026-11-12.xlsx' download>⬇ 이번 회차 엑셀</a><a class='btnlink' href='archive.html'>📁 지난 회차 보기</a><a class='btnlink' href='index.html'>🏠 지금 지원 가능한 공고</a></div>
-<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>경기</span><div class='rchips'><label class='rchip'><input type='checkbox' value='경기/-' checked onchange='applyRegions(true)'>(시 미정) <i>1</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
-var NEAR = [];
+<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>서울</span><div class='rchips'><label class='rchip'><input type='checkbox' value='서울/구로구' onchange='applyRegions(true)'>구로구 <i>1</i></label></div></div><div class='rrow'><span class='rsido'>경기</span><div class='rchips'><label class='rchip'><input type='checkbox' value='경기/안양시' onchange='applyRegions(true)'>안양시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/안양시일시' onchange='applyRegions(true)'>안양시일시 <i>1</i></label><label class='rchip near'><input type='checkbox' value='경기/의정부시' checked onchange='applyRegions(true)'>의정부시 <i>1</i></label></div></div><div class='rrow'><span class='rsido'>대전</span><div class='rchips'><label class='rchip'><input type='checkbox' value='대전/-' onchange='applyRegions(true)'>(구 미정) <i>1</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
+var NEAR = ["\uacbd\uae30/\uc758\uc815\ubd80\uc2dc"];
 function boxes(){ return [].slice.call(document.querySelectorAll('.regionbox input[type=checkbox]')); }
 function pick(what){
   boxes().forEach(function(b){
@@ -167,23 +181,51 @@ if (document.readyState === 'loading') {
   처음시작();
 }
 </script>
-<h3 id='sumhead' data-total='1'>한눈에 보기 — 전체 1건</h3>
+<div class='hklegend'><b>고용형태</b> &nbsp;<span class='hk hk-reg'>정규직</span><span class='hk hk-muki'>무기직</span>정년까지 일하는 무기계약·공무직 &nbsp;<span class='hk hk-temp'>계약직</span>기간제 등 기간이 정해진 자리 &nbsp;<span class='hk hk-sub'>대체인력</span>육아휴직 등 빈자리를 그 기간만 채움 &nbsp;<span class='hk hk-exp'>체험형 인턴</span><span class='hk hk-intern'>채용형 인턴</span><br>이름표가 여러 개면 한 공고에서 여러 형태를 같이 뽑는 것입니다. 어느 자리가 어떤 형태인지는 원문 공고에서 확인하세요.</div>
+<h3 id='sumhead' data-total='4'>한눈에 보기 — 전체 4건</h3>
 <p class='hint'>줄을 누르면 아래 상세 내용으로 바로 갑니다.</p>
 <table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>근무지</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
-<tr data-dl='2026-11-26' data-rk='경기/-'><td>1</td><td><a href='#c1'>한국청소년상담복지개발원</a></td><td>제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집<span class='newtag'>NEW</span></td><td><span class='zone z3'>경기</span> 경기</td><td></td><td>무기계약직,비정규직</td><td>2026-11-26</td><td class='st'>D-14</td></tr>
+<tr class='urgent' data-dl='2026-11-16' data-rk='경기/의정부시'><td>1</td><td><a href='#c1'>의정부시남자단기청소년쉼터</a></td><td>[채용공고]의정부시남자단기청소년쉼터 직원채용(정규직) 연장공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z1'>가까움</span> 경기도 의정부시</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-16</td><td class='st'>D-4</td></tr>
+<tr data-dl='2026-11-24' data-rk='서울/구로구'><td>2</td><td><a href='#c2'>구로2동 신암청소년센터</a></td><td>구로2동 신암청소년센터 직원 공개채용 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 구로구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-24</td><td class='st'>D-12</td></tr>
+<tr class='urgent' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><td>3</td><td><a href='#c3'>안양시일시청소년쉼터(고정형, 민들레뜨락)</a></td><td>2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z3'>경기</span> 경기도 안양시 만안구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-19</td><td class='st'>D-7</td></tr>
+<tr class='urgent' data-dl='2026-11-18' data-rk='대전/-'><td>4</td><td><a href='#c4'>대전YWCA가족쉼터</a></td><td>대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(2차)<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-18</td><td class='st'>D-6</td></tr>
 </table>
 <h3>상세</h3>
-<div class='card' id='c1' data-dl='2026-11-26' data-rk='경기/-'><h2>1. 한국청소년상담복지개발원 — 제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-14</span><table>
-<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기</td></tr>
-<tr><td class='k'>고용형태</td><td>무기계약직,비정규직</td></tr>
-<tr><td class='k'>학력</td><td>학력무관</td></tr>
-<tr><td class='k'>인원</td><td>14</td></tr>
+<div class='card' id='c1' data-dl='2026-11-16' data-rk='경기/의정부시'><h2>1. 의정부시남자단기청소년쉼터 — [채용공고]의정부시남자단기청소년쉼터 직원채용(정규직) 연장공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span> <span class='d'>D-4</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z1'>가까움</span> 경기도 의정부시</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-09</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-16</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1078359' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1078359</a></td></tr>
+</table></div>
+<div class='card' id='c2' data-dl='2026-11-24' data-rk='서울/구로구'><h2>2. 구로2동 신암청소년센터 — 구로2동 신암청소년센터 직원 공개채용 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>D-12</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 구로구</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>경력3~4년</td></tr>
+<tr><td class='k'>인원</td><td>3</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-10</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-24</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1078654' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1078654</a></td></tr>
+</table></div>
+<div class='card' id='c3' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><h2>3. 안양시일시청소년쉼터(고정형, 민들레뜨락) — 2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>D-7</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 안양시 만안구</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-13</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-19</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1078540' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1078540</a></td></tr>
+</table></div>
+<div class='card' id='c4' data-dl='2026-11-18' data-rk='대전/-'><h2>4. 대전YWCA가족쉼터 — 대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(2차)<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span><span class='tag'>복지</span> <span class='d'>D-6</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
 <tr><td class='k'>접수시작</td><td>2026-11-12</td></tr>
-<tr><td class='k'>접수마감</td><td>2026-11-26</td></tr>
-<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
-<tr><td class='k'>자격요건</td><td>[공무직] ○ 일반직 5급(치료재활분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(프로그램운영분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(주간생활지도분야)_남 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(프로그램운영분야)_여 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(식당조리분야) 2명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 환경보안관리직(경비분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 환경보안관리직(미화분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(시설관리분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(운전분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 [기간제(휴직대체)] ○ 보호자립지원직 다급</td></tr>
-<tr><td class='k'>우대</td><td>장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조) 장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조)</td></tr>
-<tr><td class='k'>지원</td><td><a href='https://kyci.fairyhr.com/announcement/detail/36' target='_blank' rel='noopener'>https://kyci.fairyhr.com/announcement/detail/36</a></td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-18</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1079147' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1079147</a></td></tr>
 </table></div>
 <script>
 function share(){
