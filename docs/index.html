@@ -54,6 +54,19 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
 .zone.z2{background:#e0e7ff;color:#3730a3}
 .zone.z3{background:#f3f4f6;color:#6b7280}
 .zone.z4{background:#ffedd5;color:#9a3412}
+.hk{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11.5px;font-weight:700;
+ margin:1px 4px 1px 0;white-space:nowrap;border:1px solid transparent}
+.hk-reg{background:#166534;color:#fff}
+.hk-muki{background:#1d4ed8;color:#fff}
+.hk-intern{background:#ccfbf1;color:#115e59;border-color:#5eead4}
+.hk-exp{background:#f3e8ff;color:#6b21a8;border-color:#d8b4fe}
+.hk-temp{background:#f3f4f6;color:#374151;border-color:#9ca3af}
+.hk-part{background:#fff;color:#374151;border-color:#9ca3af}
+.hk-sub{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.hk-etc{background:#fff;color:#374151;border-color:#d1d5db}
+.hkm{display:none;margin-top:3px}
+.card td{overflow-wrap:anywhere}
+.hklegend{font-size:12.5px;color:#374151;margin:0 0 14px;line-height:1.9}
 .regionbox{border:1px solid #d1d5db;border-radius:10px;padding:11px 13px;margin:0 0 16px;
  background:#fafafa}
 .rhead{font-size:13.5px;margin-bottom:8px}
@@ -86,6 +99,7 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  table.sum th:nth-child(6),table.sum td:nth-child(6){display:none}
  table.sum td:nth-child(2){min-width:5.2em}
  table.sum th:nth-child(7),table.sum td:nth-child(7){white-space:nowrap;font-size:11.5px}
+ .hkm{display:block}
  .card h2{font-size:14.5px}
  td.k{width:4.6em}}
 @media print{body{margin:0;font-size:11pt}.bar,.noprint,.tabs{display:none!important}
@@ -94,11 +108,11 @@ table.sum tr.gone td.st{text-decoration:none;color:#6b7280;font-weight:700}
  .warn{border:2px solid #000;background:#fff;color:#000}
  h3{break-after:avoid}a{color:#000;text-decoration:none}}</style>
 <h1>상담 · 행정 채용공고 (서울 · 경기 · 대전)</h1>
-<div class='sub'>2026-11-19 기준으로 <b>접수가 끝나지 않은 공고 22건</b>입니다. 마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 요건·우대에 적힌 공고가 0건</b>입니다.<br><b>월요일·목요일</b>에 저절로 새로 고쳐집니다. 주소는 늘 같으니, <b>🔗 링크 보내기</b>로 한 번 보내 두면 받는 분도 계속 최신으로 보게 됩니다.</div>
-<div class='stamp'>🕒 마지막 갱신 2026-11-19 13:31 (한국시간) · 잡알리오·복지넷에서 68건을 훑어 7건</div>
+<div class='sub'>2026-11-19 기준으로 <b>접수가 끝나지 않은 공고 30건</b>입니다. 마감이 가까운 순서로 놓았습니다. 그중 <b>⭐ 청소년상담사 자격이 요건·우대에 적힌 공고가 0건</b>입니다.<br><b>월요일·목요일</b>에 저절로 새로 고쳐집니다. 주소는 늘 같으니, <b>🔗 링크 보내기</b>로 한 번 보내 두면 받는 분도 계속 최신으로 보게 됩니다.</div>
+<div class='stamp'>🕒 마지막 갱신 2026-11-19 14:00 (한국시간) · 잡알리오·복지넷에서 301건을 훑어 169건</div>
 <div class='warn'><b>⚠️ 지원하기 전에 반드시 원문 공고를 확인하세요.</b><br>이 표는 잡알리오·복지넷의 공고 요약을 자동으로 모아 정리한 것입니다. <b>자격요건·마감일·근무조건이 실제 공고와 다를 수 있고, 공고가 중간에 바뀌거나 취소되기도 합니다.</b> 각 공고의 <b>‘지원’ 링크</b>를 눌러 직접 확인하세요.<br><b>‘자격’ 칸의 ⭐ 는 공고 글자에 ‘청소년상담사’가 들어 있다는 표시일 뿐</b>이며, 필수 자격인지 우대 사항인지는 원문에서 확인해야 합니다.</div>
 <div class='bar'><button onclick='share()'>🔗 이 화면 링크 보내기</button><button class='ghost' onclick='window.print()'>🖨 인쇄 / PDF로 저장</button><a class='btnlink' href='files/상담행정공고_최신.xlsx' download>⬇ 엑셀 받기 (늘 최신)</a><a class='btnlink' href='https://hongyul67-cpu.github.io/sangdam-chaeyong/archive.html'>📁 지난 회차 보기</a></div>
-<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>서울</span><div class='rchips'><label class='rchip'><input type='checkbox' value='서울/성동구' onchange='applyRegions(true)'>성동구 <i>2</i></label><label class='rchip'><input type='checkbox' value='서울/구로구' onchange='applyRegions(true)'>구로구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/동대문구' checked onchange='applyRegions(true)'>동대문구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/성북구' checked onchange='applyRegions(true)'>성북구 <i>1</i></label><label class='rchip'><input type='checkbox' value='서울/종로구' onchange='applyRegions(true)'>종로구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/중랑구' checked onchange='applyRegions(true)'>중랑구 <i>1</i></label><label class='rchip'><input type='checkbox' value='서울/-' onchange='applyRegions(true)'>(구 미정) <i>7</i></label></div></div><div class='rrow'><span class='rsido'>경기</span><div class='rchips'><label class='rchip'><input type='checkbox' value='경기/안산시' onchange='applyRegions(true)'>안산시 <i>2</i></label><label class='rchip'><input type='checkbox' value='경기/시흥시' onchange='applyRegions(true)'>시흥시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/안양시' onchange='applyRegions(true)'>안양시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/안양시일시' onchange='applyRegions(true)'>안양시일시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/-' onchange='applyRegions(true)'>(시 미정) <i>4</i></label></div></div><div class='rrow'><span class='rsido'>대전</span><div class='rchips'><label class='rchip'><input type='checkbox' value='대전/중구' onchange='applyRegions(true)'>중구 <i>1</i></label><label class='rchip'><input type='checkbox' value='대전/-' onchange='applyRegions(true)'>(구 미정) <i>2</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
+<div class='regionbox noprint'><div class='rhead'><b>📍 지역 고르기</b><span class='rhint'>보고 싶은 지역만 켜 두세요. 다음에 열어도 그대로입니다.</span></div><div class='rquick'><button type='button' onclick="pick('near')">노원 인근</button><button type='button' onclick="pick('서울')">서울 전체</button><button type='button' onclick="pick('경기')">경기 전체</button><button type='button' onclick="pick('대전')">대전 전체</button><button type='button' onclick="pick('all')">모두</button><button type='button' class='off' onclick="pick('none')">모두 끄기</button></div><div class='rrow'><span class='rsido'>서울</span><div class='rchips'><label class='rchip'><input type='checkbox' value='서울/성동구' onchange='applyRegions(true)'>성동구 <i>3</i></label><label class='rchip'><input type='checkbox' value='서울/강동구' onchange='applyRegions(true)'>강동구 <i>1</i></label><label class='rchip'><input type='checkbox' value='서울/구로구' onchange='applyRegions(true)'>구로구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/동대문구' checked onchange='applyRegions(true)'>동대문구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/성북구' checked onchange='applyRegions(true)'>성북구 <i>1</i></label><label class='rchip'><input type='checkbox' value='서울/종로구' onchange='applyRegions(true)'>종로구 <i>1</i></label><label class='rchip near'><input type='checkbox' value='서울/중랑구' checked onchange='applyRegions(true)'>중랑구 <i>1</i></label><label class='rchip'><input type='checkbox' value='서울/-' onchange='applyRegions(true)'>(구 미정) <i>7</i></label></div></div><div class='rrow'><span class='rsido'>경기</span><div class='rchips'><label class='rchip'><input type='checkbox' value='경기/안산시' onchange='applyRegions(true)'>안산시 <i>2</i></label><label class='rchip'><input type='checkbox' value='경기/광명시' onchange='applyRegions(true)'>광명시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/시흥시' onchange='applyRegions(true)'>시흥시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/안양시' onchange='applyRegions(true)'>안양시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/안양시일시' onchange='applyRegions(true)'>안양시일시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/용인시' onchange='applyRegions(true)'>용인시 <i>1</i></label><label class='rchip'><input type='checkbox' value='경기/-' onchange='applyRegions(true)'>(시 미정) <i>4</i></label></div></div><div class='rrow'><span class='rsido'>대전</span><div class='rchips'><label class='rchip'><input type='checkbox' value='대전/동구' onchange='applyRegions(true)'>동구 <i>1</i></label><label class='rchip'><input type='checkbox' value='대전/유성구' onchange='applyRegions(true)'>유성구 <i>1</i></label><label class='rchip'><input type='checkbox' value='대전/중구' onchange='applyRegions(true)'>중구 <i>1</i></label><label class='rchip'><input type='checkbox' value='대전/-' onchange='applyRegions(true)'>(구 미정) <i>4</i></label></div></div><div class='rsum' id='rsum'></div></div><script>
 var NEAR = ["\uc11c\uc6b8/\ub3d9\ub300\ubb38\uad6c", "\uc11c\uc6b8/\uc131\ubd81\uad6c", "\uc11c\uc6b8/\uc911\ub791\uad6c"];
 function boxes(){ return [].slice.call(document.querySelectorAll('.regionbox input[type=checkbox]')); }
 function pick(what){
@@ -167,43 +181,53 @@ if (document.readyState === 'loading') {
   처음시작();
 }
 </script>
-<h3 id='sumhead' data-total='22'>한눈에 보기 — 전체 22건</h3>
+<div class='hklegend'><b>고용형태</b> &nbsp;<span class='hk hk-reg'>정규직</span><span class='hk hk-muki'>무기직</span>정년까지 일하는 무기계약·공무직 &nbsp;<span class='hk hk-temp'>계약직</span>기간제 등 기간이 정해진 자리 &nbsp;<span class='hk hk-sub'>대체인력</span>육아휴직 등 빈자리를 그 기간만 채움 &nbsp;<span class='hk hk-exp'>체험형 인턴</span><span class='hk hk-intern'>채용형 인턴</span><br>이름표가 여러 개면 한 공고에서 여러 형태를 같이 뽑는 것입니다. 어느 자리가 어떤 형태인지는 원문 공고에서 확인하세요.</div>
+<h3 id='sumhead' data-total='30'>한눈에 보기 — 전체 30건</h3>
 <p class='hint'>줄을 누르면 아래 상세 내용으로 바로 갑니다.</p>
 <table class='sum'><tr><th>#</th><th>기관</th><th>제목</th><th>근무지</th><th>자격</th><th>고용형태</th><th>마감</th><th>상태</th></tr>
-<tr class='urgent' data-dl='2026-11-20' data-rk='서울/동대문구'><td>1</td><td><a href='#c1'>구립동대문장애인종합복지관</a></td><td>구립동대문장애인종합복지관 직원 채용 공고(장노년건강지원팀 사회복지사-육아휴직대체, 아동청소년행복팀 작업치료사</td><td><span class='zone z1'>가까움</span> 서울특별시 동대문구</td><td></td><td>계약직</td><td>2026-11-20</td><td class='st'>D-1</td></tr>
-<tr data-dl='2026-11-30' data-rk='서울/성북구'><td>2</td><td><a href='#c2'>새터민청소년그룹홈 가족</a></td><td>새터민청소년그룹홈 &lt;가족&gt; 보육팀 사회복지사 모집</td><td><span class='zone z1'>가까움</span> 서울특별시 성북구</td><td></td><td>정규직</td><td>2026-11-30</td><td class='st'>D-11</td></tr>
-<tr data-dl='2026-11-30' data-rk='서울/중랑구'><td>3</td><td><a href='#c3'>시립망우여자단기청소년쉼터</a></td><td>시립망우여자단기청소년쉼터 생활지도사(기간제) 공개채용 공고</td><td><span class='zone z1'>가까움</span> 서울특별시 중랑구</td><td></td><td>계약직</td><td>2026-11-30</td><td class='st'>D-11</td></tr>
-<tr class='urgent' data-dl='2026-11-23' data-rk='서울/-'><td>4</td><td><a href='#c4'>아담스지역아동센터</a></td><td>(사)들꽃청소년세상 아담스 지역아동센터 생활복지사를 모십니다</td><td><span class='zone z2'>서울</span> 서울특별시</td><td></td><td></td><td>2026-11-23</td><td class='st'>D-4</td></tr>
-<tr class='urgent' data-dl='2026-11-23' data-rk='서울/종로구'><td>5</td><td><a href='#c5'>어린이청소년돌봄네트워크사회적협동조합 온 친구네지역아동센터</a></td><td>친구네 청소년센터 활동가를 찾습니다</td><td><span class='zone z2'>서울</span> 서울특별시 종로구</td><td></td><td>정규직</td><td>2026-11-23</td><td class='st'>D-4</td></tr>
-<tr class='urgent' data-dl='2026-11-23' data-rk='서울/-'><td>6</td><td><a href='#c6'>친구네지역아동센터</a></td><td>친구네 청소년센터 활동가를 찾습니다</td><td><span class='zone z2'>서울</span> 서울특별시</td><td></td><td></td><td>2026-11-23</td><td class='st'>D-4</td></tr>
-<tr class='urgent' data-dl='2026-11-24' data-rk='서울/구로구'><td>7</td><td><a href='#c7'>구로2동 신암청소년센터</a></td><td>구로2동 신암청소년센터 직원 공개채용 공고</td><td><span class='zone z2'>서울</span> 서울특별시 구로구</td><td></td><td>계약직</td><td>2026-11-24</td><td class='st'>D-5</td></tr>
-<tr class='urgent' data-dl='2026-11-25' data-rk='서울/성동구'><td>8</td><td><a href='#c8'>성동문화재단</a></td><td>성동청소년문화의집 사회복지직 6급 채용 공고</td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td><td></td><td>정규직</td><td>2026-11-25</td><td class='st'>D-6</td></tr>
-<tr class='urgent' data-dl='2026-11-25' data-rk='서울/성동구'><td>9</td><td><a href='#c9'>성동문화재단</a></td><td>성동청소년문화의집 사회복지직 5급 채용 공고</td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td><td></td><td>정규직</td><td>2026-11-25</td><td class='st'>D-6</td></tr>
-<tr class='urgent' data-dl='2026-11-25' data-rk='서울/- 경기/-'><td>10</td><td><a href='#c10'>학교법인한국폴리텍</a></td><td>한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고<span class='newtag'>NEW</span></td><td><span class='zone z2'>서울</span> 서울,울산,경기,충북</td><td></td><td>정규직</td><td>2026-11-25</td><td class='st'>D-6</td></tr>
-<tr data-dl='2026-12-01' data-rk='서울/-'><td>11</td><td><a href='#c11'>한국장애인개발원</a></td><td>[제2026-123호] 2026년 제3차 정책지원부 통합돌봄지원팀 육아휴직 대체인력 채용 공고<span class='newtag'>NEW</span></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td>비정규직</td><td>2026-12-01</td><td class='st'>D-12</td></tr>
-<tr data-dl='2026-12-01' data-rk='서울/- 경기/- 대전/-'><td>12</td><td><a href='#c12'>한국청소년상담복지개발원</a></td><td>제2026-7호 한국청소년상담복지개발원 직원(온라인상담원) 모집</td><td><span class='zone z2'>서울</span> 서울,부산,대구,인천,대전,울산,</td><td>○</td><td>비정규직</td><td>2026-12-01</td><td class='st'>D-12</td></tr>
-<tr data-dl='2026-12-02' data-rk='서울/-'><td>13</td><td><a href='#c13'>한국청소년활동진흥원</a></td><td>2026년 제3차 한국청소년활동진흥원 직원(기간제) 채용 공고<span class='newtag'>NEW</span></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td>비정규직</td><td>2026-12-02</td><td class='st'>D-13</td></tr>
-<tr data-dl='2026-12-04' data-rk='서울/-'><td>14</td><td><a href='#c14'>한국교통안전공단</a></td><td>한국교통안전공단 경영지원본부 운영지원처 2026년 제5차 기간제 근로자 채용(실무원-상담)<span class='newtag'>NEW</span></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td>비정규직</td><td>2026-12-04</td><td class='st'>D-15</td></tr>
-<tr class='urgent' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><td>15</td><td><a href='#c15'>안양시일시청소년쉼터(고정형, 민들레뜨락)</a></td><td>2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고</td><td><span class='zone z3'>경기</span> 경기도 안양시 만안구</td><td></td><td>계약직</td><td>2026-11-19</td><td class='st'>오늘 마감</td></tr>
-<tr class='urgent' data-dl='2026-11-24' data-rk='경기/시흥시'><td>16</td><td><a href='#c16'>시흥시남자단기청소년쉼터</a></td><td>*긴급/상시* 2026년 시흥시남자단기청소년쉼터 보호상담원 채용 공고</td><td><span class='zone z3'>경기</span> 경기도 시흥시</td><td></td><td>정규직</td><td>2026-11-24</td><td class='st'>D-5</td></tr>
-<tr class='urgent' data-dl='2026-11-26' data-rk='경기/-'><td>17</td><td><a href='#c17'>한국청소년상담복지개발원</a></td><td>제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집</td><td><span class='zone z3'>경기</span> 경기</td><td></td><td>무기계약직,비정규직</td><td>2026-11-26</td><td class='st'>D-7</td></tr>
-<tr data-dl='2026-11-30' data-rk='경기/안산시'><td>18</td><td><a href='#c18'>주) 아토</a></td><td>아토) 장애인 아동 청소년 방과후 활동 팀장급 구인합니다</td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td><td></td><td>계약직</td><td>2026-11-30</td><td class='st'>D-11</td></tr>
-<tr data-dl='2026-11-30' data-rk='경기/안산시'><td>19</td><td><a href='#c19'>주식회사 아토</a></td><td>아토) 아동 청소년 방과후 활동 제공인력 구인합니다. (경력자 관리자급)</td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td><td></td><td>계약직</td><td>2026-11-30</td><td class='st'>D-11</td></tr>
-<tr data-dl='2026-11-30' data-rk='경기/-'><td>20</td><td><a href='#c20'>함께여는청소년학교 지역아동센터</a></td><td>함께여는청소년학교 지역아동센터 생활복지사 공고</td><td><span class='zone z3'>경기</span> 경기도</td><td></td><td></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
-<tr class='urgent' data-dl='2026-11-20' data-rk='대전/중구'><td>21</td><td><a href='#c21'>대전YWCA성폭력가정폭력상담소</a></td><td>대전YWCA성폭력가정폭력상담소 상담원 채용 공고</td><td><span class='zone z4'>대전</span> 대전광역시 중구</td><td></td><td>계약직</td><td>2026-11-20</td><td class='st'>D-1</td></tr>
-<tr class='urgent' data-dl='2026-11-24' data-rk='대전/-'><td>22</td><td><a href='#c22'>학교법인한국폴리텍</a></td><td>한국폴리텍대학 대전캠퍼스 행정지원직(사무직원 휴직대체 인력) 채용 공고</td><td><span class='zone z4'>대전</span> 대전</td><td></td><td>비정규직</td><td>2026-11-24</td><td class='st'>D-5</td></tr>
+<tr class='urgent' data-dl='2026-11-20' data-rk='서울/동대문구'><td>1</td><td><a href='#c1'>구립동대문장애인종합복지관</a></td><td>구립동대문장애인종합복지관 직원 채용 공고(장노년건강지원팀 사회복지사-육아휴직대체, 아동청소년행복팀 작업치료사<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z1'>가까움</span> 서울특별시 동대문구</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-11-20</td><td class='st'>D-1</td></tr>
+<tr data-dl='2026-11-30' data-rk='서울/성북구'><td>2</td><td><a href='#c2'>새터민청소년그룹홈 가족</a></td><td>새터민청소년그룹홈 &lt;가족&gt; 보육팀 사회복지사 모집<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z1'>가까움</span> 서울특별시 성북구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
+<tr data-dl='2026-11-30' data-rk='서울/중랑구'><td>3</td><td><a href='#c3'>시립망우여자단기청소년쉼터</a></td><td>시립망우여자단기청소년쉼터 생활지도사(기간제) 공개채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z1'>가까움</span> 서울특별시 중랑구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
+<tr class='urgent' data-dl='2026-11-23' data-rk='서울/-'><td>4</td><td><a href='#c4'>아담스지역아동센터</a></td><td>(사)들꽃청소년세상 아담스 지역아동센터 생활복지사를 모십니다<div class='hkm'></div></td><td><span class='zone z2'>서울</span> 서울특별시</td><td></td><td></td><td>2026-11-23</td><td class='st'>D-4</td></tr>
+<tr class='urgent' data-dl='2026-11-23' data-rk='서울/종로구'><td>5</td><td><a href='#c5'>어린이청소년돌봄네트워크사회적협동조합 온 친구네지역아동센터</a></td><td>[끌어올림] 친구네 청소년센터 활동가를 찾습니다<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 종로구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-23</td><td class='st'>D-4</td></tr>
+<tr class='urgent' data-dl='2026-11-23' data-rk='서울/-'><td>6</td><td><a href='#c6'>친구네지역아동센터</a></td><td>친구네 청소년센터 활동가를 찾습니다<div class='hkm'></div></td><td><span class='zone z2'>서울</span> 서울특별시</td><td></td><td></td><td>2026-11-23</td><td class='st'>D-4</td></tr>
+<tr class='urgent' data-dl='2026-11-24' data-rk='서울/구로구'><td>7</td><td><a href='#c7'>구로2동 신암청소년센터</a></td><td>구로2동 신암청소년센터 직원 공개채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 구로구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-24</td><td class='st'>D-5</td></tr>
+<tr class='urgent' data-dl='2026-11-24' data-rk='서울/성동구'><td>8</td><td><a href='#c8'>성동장애인종합복지관</a></td><td>성동장애인종합복지관 아동청소년지원팀 육아휴직 대체직 작업치료사 긴급 채용 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-11-24</td><td class='st'>D-5</td></tr>
+<tr class='urgent' data-dl='2026-11-25' data-rk='서울/성동구'><td>9</td><td><a href='#c9'>성동문화재단</a></td><td>성동청소년문화의집 사회복지직 5급 채용 공고<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-25</td><td class='st'>D-6</td></tr>
+<tr class='urgent' data-dl='2026-11-25' data-rk='서울/성동구'><td>10</td><td><a href='#c10'>성동문화재단</a></td><td>성동청소년문화의집 사회복지직 6급 채용 공고<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-25</td><td class='st'>D-6</td></tr>
+<tr class='urgent' data-dl='2026-11-25' data-rk='서울/- 경기/-'><td>11</td><td><a href='#c11'>학교법인한국폴리텍</a></td><td>한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z2'>서울</span> 서울,울산,경기,충북</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-25</td><td class='st'>D-6</td></tr>
+<tr data-dl='2026-12-01' data-rk='서울/-'><td>12</td><td><a href='#c12'>한국장애인개발원</a></td><td>[제2026-123호] 2026년 제3차 정책지원부 통합돌봄지원팀 육아휴직 대체인력 채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-12-01</td><td class='st'>D-12</td></tr>
+<tr data-dl='2026-12-01' data-rk='서울/- 경기/- 대전/-'><td>13</td><td><a href='#c13'>한국청소년상담복지개발원</a></td><td>제2026-7호 한국청소년상담복지개발원 직원(온라인상담원) 모집<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z2'>서울</span> 서울,부산,대구,인천,대전,울산,</td><td>○</td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-12-01</td><td class='st'>D-12</td></tr>
+<tr data-dl='2026-12-02' data-rk='서울/-'><td>14</td><td><a href='#c14'>한국청소년활동진흥원</a></td><td>2026년 제3차 한국청소년활동진흥원 직원(기간제) 채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-12-02</td><td class='st'>D-13</td></tr>
+<tr data-dl='2026-12-04' data-rk='서울/강동구'><td>15</td><td><a href='#c15'>시립일시청소년쉼터(이동형,동남)</a></td><td>시립일시청소년쉼터(이동형,동남) 2026년 제3회 신규 직원 채용공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z2'>서울</span> 서울특별시 강동구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-12-04</td><td class='st'>D-15</td></tr>
+<tr data-dl='2026-12-04' data-rk='서울/-'><td>16</td><td><a href='#c16'>한국교통안전공단</a></td><td>한국교통안전공단 경영지원본부 운영지원처 2026년 제5차 기간제 근로자 채용(실무원-상담)<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z2'>서울</span> 서울</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-12-04</td><td class='st'>D-15</td></tr>
+<tr class='urgent' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><td>17</td><td><a href='#c17'>안양시일시청소년쉼터(고정형, 민들레뜨락)</a></td><td>2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z3'>경기</span> 경기도 안양시 만안구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-19</td><td class='st'>오늘 마감</td></tr>
+<tr class='urgent' data-dl='2026-11-24' data-rk='경기/시흥시'><td>18</td><td><a href='#c18'>시흥시남자단기청소년쉼터</a></td><td>*긴급/상시* 2026년 시흥시남자단기청소년쉼터 보호상담원 채용 공고<div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z3'>경기</span> 경기도 시흥시</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-24</td><td class='st'>D-5</td></tr>
+<tr class='urgent' data-dl='2026-11-26' data-rk='경기/용인시'><td>19</td><td><a href='#c19'>국립중앙청소년디딤센터</a></td><td>국립중앙청소년디딤센터 직원 채용공고(제2026-4호)<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span></div></td><td><span class='zone z3'>경기</span> 경기도 용인시 처인구</td><td></td><td><span class='hk hk-reg'>정규직</span></td><td>2026-11-26</td><td class='st'>D-7</td></tr>
+<tr class='urgent' data-dl='2026-11-26' data-rk='경기/-'><td>20</td><td><a href='#c20'>한국청소년상담복지개발원</a></td><td>제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집<div class='hkm'><span class='hk hk-muki'>무기직</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z3'>경기</span> 경기</td><td></td><td><span class='hk hk-muki'>무기직</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-11-26</td><td class='st'>D-7</td></tr>
+<tr data-dl='2026-11-30' data-rk='경기/안산시'><td>21</td><td><a href='#c21'>주) 아토</a></td><td>아토) 장애인 아동 청소년 방과후 활동 팀장급 구인합니다<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
+<tr data-dl='2026-11-30' data-rk='경기/안산시'><td>22</td><td><a href='#c22'>주식회사 아토</a></td><td>아토) 아동 청소년 방과후 활동 제공인력 구인합니다. (경력자 관리자급)<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
+<tr data-dl='2026-11-30' data-rk='경기/-'><td>23</td><td><a href='#c23'>함께여는청소년학교 지역아동센터</a></td><td>함께여는청소년학교 지역아동센터 생활복지사 공고<div class='hkm'></div></td><td><span class='zone z3'>경기</span> 경기도</td><td></td><td></td><td>2026-11-30</td><td class='st'>D-11</td></tr>
+<tr data-dl='2026-12-02' data-rk='경기/광명시'><td>24</td><td><a href='#c24'>광명시아동보호전문기관</a></td><td>광명시아동보호전문기관 2026년 1차 임상심리전문인력 채용 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-part'>시간제</span></div></td><td><span class='zone z3'>경기</span> 경기도 광명시</td><td></td><td><span class='hk hk-part'>시간제</span></td><td>2026-12-02</td><td class='st'>D-13</td></tr>
+<tr class='urgent' data-dl='2026-11-20' data-rk='대전/중구'><td>25</td><td><a href='#c25'>대전YWCA성폭력가정폭력상담소</a></td><td>대전YWCA성폭력가정폭력상담소 상담원 채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시 중구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-11-20</td><td class='st'>D-1</td></tr>
+<tr class='urgent' data-dl='2026-11-24' data-rk='대전/-'><td>26</td><td><a href='#c26'>학교법인한국폴리텍</a></td><td>한국폴리텍대학 대전캠퍼스 행정지원직(사무직원 휴직대체 인력) 채용 공고<div class='hkm'><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z4'>대전</span> 대전</td><td></td><td><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-11-24</td><td class='st'>D-5</td></tr>
+<tr data-dl='2026-12-03' data-rk='대전/-'><td>27</td><td><a href='#c27'>대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(3차)</a></td><td>대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(3차)<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-12-03</td><td class='st'>D-14</td></tr>
+<tr data-dl='2026-12-03' data-rk='대전/동구'><td>28</td><td><a href='#c28'>대전열린가족통합상담센터</a></td><td>대전열린가족통합상담센터 신규직원(계약직) 채용공고<div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시 동구</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-12-03</td><td class='st'>D-14</td></tr>
+<tr data-dl='2026-12-04' data-rk='대전/-'><td>29</td><td><a href='#c29'>구세군정다운집</a></td><td>[구세군정다운집] 야간 상담원 채용 공고<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-temp'>계약직</span></div></td><td><span class='zone z4'>대전</span> 대전광역시</td><td></td><td><span class='hk hk-temp'>계약직</span></td><td>2026-12-04</td><td class='st'>D-15</td></tr>
+<tr data-dl='2026-12-04' data-rk='대전/유성구'><td>30</td><td><a href='#c30'>대전북부아동보호전문기관</a></td><td>대전북부아동보호전문기관 상담원(정규직,계약직, 육휴대체), 임상치료전문인력 채용<span class='newtag'>NEW</span><div class='hkm'><span class='hk hk-reg'>정규직</span><span class='hk hk-sub'>대체인력</span></div></td><td><span class='zone z4'>대전</span> 대전광역시 유성구</td><td></td><td><span class='hk hk-reg'>정규직</span><span class='hk hk-sub'>대체인력</span></td><td>2026-12-04</td><td class='st'>D-15</td></tr>
 </table>
 <h3>상세</h3>
-<div class='card' id='c1' data-dl='2026-11-20' data-rk='서울/동대문구'><h2>1. 구립동대문장애인종합복지관 — 구립동대문장애인종합복지관 직원 채용 공고(장노년건강지원팀 사회복지사-육아휴직대체, 아동청소년행복팀 작업치료사-육아휴직대체)</h2><span class='src'>복지넷</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-1</span><table>
+<div class='card' id='c1' data-dl='2026-11-20' data-rk='서울/동대문구'><h2>1. 구립동대문장애인종합복지관 — 구립동대문장애인종합복지관 직원 채용 공고(장노년건강지원팀 사회복지사-육아휴직대체, 아동청소년행복팀 작업치료사-육아휴직대체)</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-1</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z1'>가까움</span> 서울특별시 동대문구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
 <tr><td class='k'>인원</td><td>2</td></tr>
 <tr><td class='k'>접수시작</td><td>2026-11-05</td></tr>
 <tr><td class='k'>접수마감</td><td>2026-11-20</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077624' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077624</a></td></tr>
 </table></div>
-<div class='card' id='c2' data-dl='2026-11-30' data-rk='서울/성북구'><h2>2. 새터민청소년그룹홈 가족 — 새터민청소년그룹홈 &lt;가족&gt; 보육팀 사회복지사 모집</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
+<div class='card' id='c2' data-dl='2026-11-30' data-rk='서울/성북구'><h2>2. 새터민청소년그룹홈 가족 — 새터민청소년그룹홈 &lt;가족&gt; 보육팀 사회복지사 모집</h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z1'>가까움</span> 서울특별시 성북구</td></tr>
 <tr><td class='k'>고용형태</td><td>정규직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -212,7 +236,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-30</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1074658' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1074658</a></td></tr>
 </table></div>
-<div class='card' id='c3' data-dl='2026-11-30' data-rk='서울/중랑구'><h2>3. 시립망우여자단기청소년쉼터 — 시립망우여자단기청소년쉼터 생활지도사(기간제) 공개채용 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span> <span class='d'>D-11</span><table>
+<div class='card' id='c3' data-dl='2026-11-30' data-rk='서울/중랑구'><h2>3. 시립망우여자단기청소년쉼터 — 시립망우여자단기청소년쉼터 생활지도사(기간제) 공개채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>D-11</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z1'>가까움</span> 서울특별시 중랑구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -229,7 +253,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-23</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1073282' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1073282</a></td></tr>
 </table></div>
-<div class='card' id='c5' data-dl='2026-11-23' data-rk='서울/종로구'><h2>5. 어린이청소년돌봄네트워크사회적협동조합 온 친구네지역아동센터 — 친구네 청소년센터 활동가를 찾습니다</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-4</span><table>
+<div class='card' id='c5' data-dl='2026-11-23' data-rk='서울/종로구'><h2>5. 어린이청소년돌봄네트워크사회적협동조합 온 친구네지역아동센터 — [끌어올림] 친구네 청소년센터 활동가를 찾습니다</h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-4</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 종로구</td></tr>
 <tr><td class='k'>고용형태</td><td>정규직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -246,7 +270,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-23</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1076697' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1076697</a></td></tr>
 </table></div>
-<div class='card' id='c7' data-dl='2026-11-24' data-rk='서울/구로구'><h2>7. 구로2동 신암청소년센터 — 구로2동 신암청소년센터 직원 공개채용 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span> <span class='d'>D-5</span><table>
+<div class='card' id='c7' data-dl='2026-11-24' data-rk='서울/구로구'><h2>7. 구로2동 신암청소년센터 — 구로2동 신암청소년센터 직원 공개채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>D-5</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 구로구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>경력3~4년</td></tr>
@@ -255,16 +279,17 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-24</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1078654' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1078654</a></td></tr>
 </table></div>
-<div class='card' id='c8' data-dl='2026-11-25' data-rk='서울/성동구'><h2>8. 성동문화재단 — 성동청소년문화의집 사회복지직 6급 채용 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-6</span><table>
+<div class='card' id='c8' data-dl='2026-11-24' data-rk='서울/성동구'><h2>8. 성동장애인종합복지관 — 성동장애인종합복지관 아동청소년지원팀 육아휴직 대체직 작업치료사 긴급 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-5</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td></tr>
-<tr><td class='k'>고용형태</td><td>정규직</td></tr>
-<tr><td class='k'>경력</td><td>경력1~2년</td></tr>
-<tr><td class='k'>인원</td><td>2</td></tr>
-<tr><td class='k'>접수시작</td><td>2026-11-11</td></tr>
-<tr><td class='k'>접수마감</td><td>2026-11-25</td></tr>
-<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077874' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077874</a></td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-17</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-24</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1080312' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1080312</a></td></tr>
 </table></div>
-<div class='card' id='c9' data-dl='2026-11-25' data-rk='서울/성동구'><h2>9. 성동문화재단 — 성동청소년문화의집 사회복지직 5급 채용 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-6</span><table>
+<div class='card' id='c9' data-dl='2026-11-25' data-rk='서울/성동구'><h2>9. 성동문화재단 — 성동청소년문화의집 사회복지직 5급 채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-6</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td></tr>
 <tr><td class='k'>고용형태</td><td>정규직</td></tr>
 <tr><td class='k'>경력</td><td>경력5~9년</td></tr>
@@ -273,7 +298,16 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-25</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077868' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077868</a></td></tr>
 </table></div>
-<div class='card' id='c10' data-dl='2026-11-25' data-rk='서울/- 경기/-'><h2>10. 학교법인한국폴리텍 — 한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>교육</span> <span class='d'>D-6</span><table>
+<div class='card' id='c10' data-dl='2026-11-25' data-rk='서울/성동구'><h2>10. 성동문화재단 — 성동청소년문화의집 사회복지직 6급 채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-6</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 성동구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>경력1~2년</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-11</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-25</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077874' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077874</a></td></tr>
+</table></div>
+<div class='card' id='c11' data-dl='2026-11-25' data-rk='서울/- 경기/-'><h2>11. 학교법인한국폴리텍 — 한국폴리텍대학 지역대학장(서울강서, 화성, 충주, 울산) 공개초빙 공고</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-reg'>정규직</span><span class='tag'>교육</span> <span class='d'>D-6</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울,울산,경기,충북</td></tr>
 <tr><td class='k'>고용형태</td><td>정규직</td></tr>
 <tr><td class='k'>학력</td><td>석사,박사</td></tr>
@@ -284,7 +318,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>우대</td><td>해당사항 없음 해당사항 없음</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.kopo.ac.kr/board.do?menu=10523&amp;mode=view&amp;post=790549' target='_blank' rel='noopener'>https://www.kopo.ac.kr/board.do?menu=10523&amp;mode=view&amp;post=790549</a></td></tr>
 </table></div>
-<div class='card' id='c11' data-dl='2026-12-01' data-rk='서울/-'><h2>11. 한국장애인개발원 — [제2026-123호] 2026년 제3차 정책지원부 통합돌봄지원팀 육아휴직 대체인력 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>복지</span> <span class='d'>D-12</span><table>
+<div class='card' id='c12' data-dl='2026-12-01' data-rk='서울/-'><h2>12. 한국장애인개발원 — [제2026-123호] 2026년 제3차 정책지원부 통합돌봄지원팀 육아휴직 대체인력 채용 공고</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>복지</span> <span class='d'>D-12</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울</td></tr>
 <tr><td class='k'>고용형태</td><td>비정규직</td></tr>
 <tr><td class='k'>학력</td><td>학력무관</td></tr>
@@ -296,7 +330,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>우대</td><td>(우대사항) ○공공기관, 사회복지 관련기관에 재직한 자 ○교육 및 교재개발, 사업 평가 및 지침개발 등 관련업무 유경험자 ○해당 직무(장애인 의료·요양 통합돌봄사업 운영 및 지원)를 수행할 수 있는 자 (가점사항) ○ 취업지원대상자 : 각 전형별 만점의 10% 또는 5% 가점 ○ 장애인 : 각 전형별 5점 가점 ○ 비수도권 지역인재 : 서류전형 시 2점 가점 ○ 경력단절여성 : 서류전형 시 2점 가점 ○ 국민기초생활수급자 : 서류전형 시 3점 가점 ○ 북한이탈주민 : 서류전형 시 3점 가점 ○ 다문화가족 : 서류전형 시 3점 가점 ○ 자립준비청년 : 서류전형 시 3점 가점 ○ 재직자 : 서류전형 시 3점 또는 5점 가점(근무기한에 따라 다름) ○ 청년인턴 수료자 : 서류전형 시 2점 가점 ※ 가산점이 중복될 경우, 전형별 유리한 가산점 1개만 인정(중복적용 불가) ※ 가산점은 전형별 과락점(60점 미만)이상 득점한 자에 한해 인정하며, 기한 내 증빙서류 미제출 또는 기준에 부합하지 않는 경우 불합격 처리함. ※ 채용분야별 모집 예정인원이 3명 이하인 경우에는 취업지원대상자 가산점 미부여 (단, 채용분야가 보훈 제한경쟁인 경우에는 제외 (근거: 「국가유공자 등</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://koddi.fairyhr.com' target='_blank' rel='noopener'>https://koddi.fairyhr.com</a></td></tr>
 </table></div>
-<div class='card' id='c12' data-dl='2026-12-01' data-rk='서울/- 경기/- 대전/-'><h2>12. 한국청소년상담복지개발원 — 제2026-7호 한국청소년상담복지개발원 직원(온라인상담원) 모집</h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>교육</span><span class='tag lic'>청소년상담복지</span> <span class='d'>D-12</span><table>
+<div class='card' id='c13' data-dl='2026-12-01' data-rk='서울/- 경기/- 대전/-'><h2>13. 한국청소년상담복지개발원 — 제2026-7호 한국청소년상담복지개발원 직원(온라인상담원) 모집</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>교육</span><span class='tag lic'>청소년상담복지</span> <span class='d'>D-12</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울,부산,대구,인천,대전,울산,세종,경기,강원,충북,충남,전북,전남광주,경북,경남,제주</td></tr>
 <tr><td class='k'>고용형태</td><td>비정규직</td></tr>
 <tr><td class='k'>학력</td><td>대졸(4년),석사</td></tr>
@@ -308,7 +342,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>우대</td><td>국가유공자, 장애인, 지역인재, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 본원 청년인턴 경력자 등 ※자세한 사항은 첨부파일 참조 국가유공자, 장애인, 지역인재, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력 등</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://kyci.fairyhr.com/' target='_blank' rel='noopener'>https://kyci.fairyhr.com/</a></td></tr>
 </table></div>
-<div class='card' id='c13' data-dl='2026-12-02' data-rk='서울/-'><h2>13. 한국청소년활동진흥원 — 2026년 제3차 한국청소년활동진흥원 직원(기간제) 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-13</span><table>
+<div class='card' id='c14' data-dl='2026-12-02' data-rk='서울/-'><h2>14. 한국청소년활동진흥원 — 2026년 제3차 한국청소년활동진흥원 직원(기간제) 채용 공고</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-13</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울</td></tr>
 <tr><td class='k'>고용형태</td><td>비정규직</td></tr>
 <tr><td class='k'>학력</td><td>학력무관</td></tr>
@@ -320,7 +354,16 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>우대</td><td>ㅇ 취업지원 대상자 - 법률에 따른 가점, 전형마다 매 과목별 만점의 5% 또는 10%(5점 또는 10점) - 「국가유공자 등 예우 및 지원에 관한 법률」 제31조, 「독립유공자예우에 관한 법률」 제16조, 「보훈보상대상자 지원에 관한 법률」 제35조, 「고엽제후유의증 등 환자지원 및 단체설립에 관한 법률」 제7조의9, 「5ㆍ18민주유공자예우 및 단체설립에 관한 법률」 제22조, 「특수임무유공자 예우 및 단체설립에 관한 법률」 제24조에 따라 지방보훈관서가 발급한 취업지원대상자 증명서 소지자를 말한다. - 관련법령에 따라 직무별 모집단위의 최종 선발예정인원이 4명 이상이거나 선발예정인원이 4명 미만이더라도 지원자가 선발예정인원과 같거나 적을 경우에 한하여 적용한다. ㅇ 장애인 - 등록 장애인, 각 전형별 만점의 5%(5점) - 「장애인고용법」 제2조에 따른 ‘장애인’ 또는 ‘중증장애인’을 확인할 수 있도록 「장애인고용법 시행령」 제3조에 따라 확인할 수 있는 자료(장애인등록증, 국가보훈등록증 등) 소지자를 말한다. ㅇ 저소득층 - 기초생활보장 수급자 및 차상위계층, 각 전형별 만점의 3%(3점) - 「국민기초생활보장법」 제2조제2호의 규정에 의한 수급자 증명</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.kywa.or.kr/about/about05_5_view.jsp?bgubun=&amp;currPage=1&amp;searchText=&amp;searchColumn=&amp;searchTextEn=&amp;bgubun=&amp;no=36989' target='_blank' rel='noopener'>https://www.kywa.or.kr/about/about05_5_view.jsp?bgubun=&amp;currPage=1&amp;searchText=&amp;searchColumn=&amp;searchTextEn=&amp;bgubun=&amp;no=36989</a></td></tr>
 </table></div>
-<div class='card' id='c14' data-dl='2026-12-04' data-rk='서울/-'><h2>14. 한국교통안전공단 — 한국교통안전공단 경영지원본부 운영지원처 2026년 제5차 기간제 근로자 채용(실무원-상담)<span class='newtag'>NEW</span></h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>행정</span> <span class='d'>D-15</span><table>
+<div class='card' id='c15' data-dl='2026-12-04' data-rk='서울/강동구'><h2>15. 시립일시청소년쉼터(이동형,동남) — 시립일시청소년쉼터(이동형,동남) 2026년 제3회 신규 직원 채용공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span> <span class='d'>D-15</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울특별시 강동구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-19</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-04</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1080924' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1080924</a></td></tr>
+</table></div>
+<div class='card' id='c16' data-dl='2026-12-04' data-rk='서울/-'><h2>16. 한국교통안전공단 — 한국교통안전공단 경영지원본부 운영지원처 2026년 제5차 기간제 근로자 채용(실무원-상담)</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>행정</span> <span class='d'>D-15</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z2'>서울</span> 서울</td></tr>
 <tr><td class='k'>고용형태</td><td>비정규직</td></tr>
 <tr><td class='k'>학력</td><td>학력무관</td></tr>
@@ -332,7 +375,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>우대</td><td>○ 「국가유공자 등 예우 및 지원에 관한 법률」 제29조에 의한 취업지원대상자는 각 전형단계별로 만점(가점제외)의 5% 또는 10%를 우대 적용합니다. (단, 가점을 받아 채용시험에 합격하는 사람은 선발인원의 30%를 초과할 수 없으며, 동점자 발생시 취업지원대상자 우선 선발) * 취업지원대상자(국가유공자 등 예우 및 지원에 관한 법률 등)에 대한 가점은 채용분야별 채용인원이 3인 이하인 경우 부여하지 아니하며, 다만 응시자 수가 채용인원과 같거나 적은 경우에는 부여함 ○ 「장애인고용촉진 및 직업재활법」 상 장애인은 각 전형단계별로 만점(가점제외)의 5%를 우대 적용합니다. (단, 장애인 제한경쟁으로 운영되는 경우 가점을 적용받지 않습니다.) ○ 북한이탈주민의 보호 및 정착지원에 관한 법률에 의한 북한이탈주민은 서류심사 만점(가점제외)의 5% 가산점 부여 ○ 다문화가족지원법에 의한 다문화가족 구성원은 서류심사에 만점(가점제외)의 5% 가산점 부여 ○ 아동복지법에 의한 자립지원 대상자로 아동복지시설 등에서 보호조치가 종료되거나 퇴소한지 원서 접수 마감일 기준 5년 이내인 자는 서류심사에 만점(가점제외)의 5% 가산점 부여 (단, 자립준비청년 제한경쟁으로 운영되</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://kotsa1.career.co.kr/' target='_blank' rel='noopener'>https://kotsa1.career.co.kr/</a></td></tr>
 </table></div>
-<div class='card' id='c15' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><h2>15. 안양시일시청소년쉼터(고정형, 민들레뜨락) — 2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span> <span class='d'>오늘 마감</span><table>
+<div class='card' id='c17' data-dl='2026-11-19' data-rk='경기/안양시 경기/안양시일시'><h2>17. 안양시일시청소년쉼터(고정형, 민들레뜨락) — 2026년 제4회 안양시일시청소년쉼터 직원 공개경쟁채용 3차 재공고</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>오늘 마감</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 안양시 만안구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -341,7 +384,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-19</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1078540' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1078540</a></td></tr>
 </table></div>
-<div class='card' id='c16' data-dl='2026-11-24' data-rk='경기/시흥시'><h2>16. 시흥시남자단기청소년쉼터 — *긴급/상시* 2026년 시흥시남자단기청소년쉼터 보호상담원 채용 공고</h2><span class='src'>복지넷</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-5</span><table>
+<div class='card' id='c18' data-dl='2026-11-24' data-rk='경기/시흥시'><h2>18. 시흥시남자단기청소년쉼터 — *긴급/상시* 2026년 시흥시남자단기청소년쉼터 보호상담원 채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-5</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 시흥시</td></tr>
 <tr><td class='k'>고용형태</td><td>정규직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -350,19 +393,28 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-24</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1069317' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1069317</a></td></tr>
 </table></div>
-<div class='card' id='c17' data-dl='2026-11-26' data-rk='경기/-'><h2>17. 한국청소년상담복지개발원 — 제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집</h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-7</span><table>
+<div class='card' id='c19' data-dl='2026-11-26' data-rk='경기/용인시'><h2>19. 국립중앙청소년디딤센터 — 국립중앙청소년디딤센터 직원 채용공고(제2026-4호)<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='tag'>청소년</span> <span class='d'>D-7</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 용인시 처인구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>13</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-12</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-11-26</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1079457' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1079457</a></td></tr>
+</table></div>
+<div class='card' id='c20' data-dl='2026-11-26' data-rk='경기/-'><h2>20. 한국청소년상담복지개발원 — 제2026-4호 국립중앙청소년디딤센터 직원(공무직, 기간제(휴직대체)) 모집</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-muki'>무기직</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span><span class='tag'>복지</span><span class='tag'>행정</span> <span class='d'>D-7</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기</td></tr>
 <tr><td class='k'>고용형태</td><td>무기계약직,비정규직</td></tr>
 <tr><td class='k'>학력</td><td>학력무관</td></tr>
 <tr><td class='k'>인원</td><td>14</td></tr>
 <tr><td class='k'>접수시작</td><td>2026-11-12</td></tr>
 <tr><td class='k'>접수마감</td><td>2026-11-26</td></tr>
-<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용 — 여러 형태를 같이 뽑는 공고라 일부 자리만 해당할 수 있습니다</td></tr>
 <tr><td class='k'>자격요건</td><td>[공무직] ○ 일반직 5급(치료재활분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(프로그램운영분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(주간생활지도분야)_남 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 보호자립지원직 다급(프로그램운영분야)_여 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(식당조리분야) 2명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 환경보안관리직(경비분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 환경보안관리직(미화분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(시설관리분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 ○ 기관운영지원직 다급(운전분야) 1명 - 응시자격 및 근무형태, 업무내용 등은 공고문 및 직무기술명세서 참조 [기간제(휴직대체)] ○ 보호자립지원직 다급</td></tr>
 <tr><td class='k'>우대</td><td>장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조) 장애인, 국가유공자, 저소득층, 한부모가족, 북한이탈주민, 다문화가족, 한국사능력, 지역인재 등(상세사항 첨부파일 채용공고문 참조)</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://kyci.fairyhr.com/announcement/detail/36' target='_blank' rel='noopener'>https://kyci.fairyhr.com/announcement/detail/36</a></td></tr>
 </table></div>
-<div class='card' id='c18' data-dl='2026-11-30' data-rk='경기/안산시'><h2>18. 주) 아토 — 아토) 장애인 아동 청소년 방과후 활동 팀장급 구인합니다</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
+<div class='card' id='c21' data-dl='2026-11-30' data-rk='경기/안산시'><h2>21. 주) 아토 — 아토) 장애인 아동 청소년 방과후 활동 팀장급 구인합니다</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>경력3~4년</td></tr>
@@ -371,7 +423,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-30</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075775' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075775</a></td></tr>
 </table></div>
-<div class='card' id='c19' data-dl='2026-11-30' data-rk='경기/안산시'><h2>19. 주식회사 아토 — 아토) 아동 청소년 방과후 활동 제공인력 구인합니다. (경력자 관리자급)</h2><span class='src'>복지넷</span><span class='tag'>청소년</span> <span class='d'>D-11</span><table>
+<div class='card' id='c22' data-dl='2026-11-30' data-rk='경기/안산시'><h2>22. 주식회사 아토 — 아토) 아동 청소년 방과후 활동 제공인력 구인합니다. (경력자 관리자급)</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>청소년</span> <span class='d'>D-11</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 안산시 상록구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -380,7 +432,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-30</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075045' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075045</a></td></tr>
 </table></div>
-<div class='card' id='c20' data-dl='2026-11-30' data-rk='경기/-'><h2>20. 함께여는청소년학교 지역아동센터 — 함께여는청소년학교 지역아동센터 생활복지사 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
+<div class='card' id='c23' data-dl='2026-11-30' data-rk='경기/-'><h2>23. 함께여는청소년학교 지역아동센터 — 함께여는청소년학교 지역아동센터 생활복지사 공고</h2><span class='src'>복지넷</span><span class='tag'>청소년</span><span class='tag'>복지</span> <span class='d'>D-11</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도</td></tr>
 <tr><td class='k'>경력</td><td>경력3~4년</td></tr>
 <tr><td class='k'>인원</td><td>1</td></tr>
@@ -388,7 +440,16 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-30</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1075618' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1075618</a></td></tr>
 </table></div>
-<div class='card' id='c21' data-dl='2026-11-20' data-rk='대전/중구'><h2>21. 대전YWCA성폭력가정폭력상담소 — 대전YWCA성폭력가정폭력상담소 상담원 채용 공고</h2><span class='src'>복지넷</span><span class='tag'>상담</span> <span class='d'>D-1</span><table>
+<div class='card' id='c24' data-dl='2026-12-02' data-rk='경기/광명시'><h2>24. 광명시아동보호전문기관 — 광명시아동보호전문기관 2026년 1차 임상심리전문인력 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-part'>시간제</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-13</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z3'>경기</span> 경기도 광명시</td></tr>
+<tr><td class='k'>고용형태</td><td>파트타임</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-18</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-02</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1080613' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1080613</a></td></tr>
+</table></div>
+<div class='card' id='c25' data-dl='2026-11-20' data-rk='대전/중구'><h2>25. 대전YWCA성폭력가정폭력상담소 — 대전YWCA성폭력가정폭력상담소 상담원 채용 공고</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span> <span class='d'>D-1</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시 중구</td></tr>
 <tr><td class='k'>고용형태</td><td>계약직</td></tr>
 <tr><td class='k'>경력</td><td>무관</td></tr>
@@ -397,7 +458,7 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>접수마감</td><td>2026-11-20</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077677' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077677</a></td></tr>
 </table></div>
-<div class='card' id='c22' data-dl='2026-11-24' data-rk='대전/-'><h2>22. 학교법인한국폴리텍 — 한국폴리텍대학 대전캠퍼스 행정지원직(사무직원 휴직대체 인력) 채용 공고</h2><span class='src'>잡알리오(공공기관)</span><span class='tag'>행정</span> <span class='d'>D-5</span><table>
+<div class='card' id='c26' data-dl='2026-11-24' data-rk='대전/-'><h2>26. 학교법인한국폴리텍 — 한국폴리텍대학 대전캠퍼스 행정지원직(사무직원 휴직대체 인력) 채용 공고</h2><span class='src'>잡알리오(공공기관)</span><span class='hk hk-temp'>계약직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>행정</span> <span class='d'>D-5</span><table>
 <tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전</td></tr>
 <tr><td class='k'>고용형태</td><td>비정규직</td></tr>
 <tr><td class='k'>학력</td><td>학력무관</td></tr>
@@ -408,6 +469,43 @@ if (document.readyState === 'loading') {
 <tr><td class='k'>자격요건</td><td>다음 각 항의 조건을 모두 충족하는 자 - (연령·학력·성별) 제한없음 - OA 프로그램(한글, 엑셀, 파워포인트 등) 활용을 통한 해당 직무수행이 가능한 자 - 학교법인 인사규정 제19조의 결격사유에 해당하지 않는 자 - 최종합격자 발표 후 즉시 근무가능한 자 (‘26.12.14. 임용 예정) * 부패방지권익위법 제82조에 따른 비위면직자는 5년간 공공기관 취업 제한</td></tr>
 <tr><td class='k'>우대</td><td>1. 법정가산점 - 취업지원대상자 독립유공자예우에 관한 법률 및 국가유공자 등 예우 및 지원에 관한 법률, 5·18민주유공자예우 및 단체설립에 관한 법률, 특수임무유공자 예우 및 단체설립에 관한 법률, 고엽제후유의증 등 환자지원 및 단체설립에 관한 법률, 보훈보상대상자 지원에 관한 법률에 따른 취업지원 대상자 2. 사회형평가산점 - 장애인: 장애인 등록증 또는 복지카드 소지자, 상이등급이 기재된 국가유공자 또는 보훈보상대상자 확인서 소지자 - 저소득층: 국민기초생활 보장법에 따른 수급자(주민등록상 세대원 포함) 또는 한부모가족지원법에 따른 지원대상자 - 다문화가족자녀: 다문화가족지원법에 따른 다문화가족의 자녀 - 북한이탈주민: 북한이탈주민의 보호 및 정착지원에 관한 법률에 따른 북한이탈주민 - 자립준비청년: 아동복지법에 따른 보호종료 아동으로서 보호시설 퇴소 5년 이내인 자 취업지원대상자, 장애인, 저소득층, 다문화가족자녀, 자립준비청년, 북한이탈주민</td></tr>
 <tr><td class='k'>지원</td><td><a href='https://www.kopo.ac.kr/daejeon/board.do?menu=10536&amp;mode=view&amp;post=790280' target='_blank' rel='noopener'>https://www.kopo.ac.kr/daejeon/board.do?menu=10536&amp;mode=view&amp;post=790280</a></td></tr>
+</table></div>
+<div class='card' id='c27' data-dl='2026-12-03' data-rk='대전/-'><h2>27. 대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(3차) — 대전YWCA가족쉼터 주거지원사업 상담원(계약직) 모집 공고(3차)<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span><span class='tag'>복지</span> <span class='d'>D-14</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>2</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-19</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-03</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1080830' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1080830</a></td></tr>
+</table></div>
+<div class='card' id='c28' data-dl='2026-12-03' data-rk='대전/동구'><h2>28. 대전열린가족통합상담센터 — 대전열린가족통합상담센터 신규직원(계약직) 채용공고</h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span><span class='tag'>복지</span> <span class='d'>D-14</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시 동구</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>신입</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-19</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-03</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1077340' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1077340</a></td></tr>
+</table></div>
+<div class='card' id='c29' data-dl='2026-12-04' data-rk='대전/-'><h2>29. 구세군정다운집 — [구세군정다운집] 야간 상담원 채용 공고<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-temp'>계약직</span><span class='tag'>상담</span> <span class='d'>D-15</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시</td></tr>
+<tr><td class='k'>고용형태</td><td>계약직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>1</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-19</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-04</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=980400' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=980400</a></td></tr>
+</table></div>
+<div class='card' id='c30' data-dl='2026-12-04' data-rk='대전/유성구'><h2>30. 대전북부아동보호전문기관 — 대전북부아동보호전문기관 상담원(정규직,계약직, 육휴대체), 임상치료전문인력 채용<span class='newtag'>NEW</span></h2><span class='src'>복지넷</span><span class='hk hk-reg'>정규직</span><span class='hk hk-sub'>대체인력</span><span class='tag'>상담</span><span class='tag'>청소년</span> <span class='d'>D-15</span><table>
+<tr><td class='k'>근무지</td><td><span class='zone z4'>대전</span> 대전광역시 유성구</td></tr>
+<tr><td class='k'>고용형태</td><td>정규직</td></tr>
+<tr><td class='k'>경력</td><td>무관</td></tr>
+<tr><td class='k'>인원</td><td>4</td></tr>
+<tr><td class='k'>접수시작</td><td>2026-11-18</td></tr>
+<tr><td class='k'>접수마감</td><td>2026-12-04</td></tr>
+<tr><td class='k'>비고</td><td class='d'>대체인력(육아휴직 등) 채용</td></tr>
+<tr><td class='k'>지원</td><td><a href='https://www.bokji.net/job/off/01_01.bokji?ID=1080632' target='_blank' rel='noopener'>https://www.bokji.net/job/off/01_01.bokji?ID=1080632</a></td></tr>
 </table></div>
 <script>
 function share(){
